@@ -1,0 +1,31 @@
+@startuml
+skinparam componentStyle rectangle
+title BiblioUNSA - Alternativa descartada: Monolito en capas
+actor Estudiante
+actor Bibliotecario
+package "Presentacion" {
+  [Web / PWA] as UI
+}
+package "Logica de negocio" {
+  [Servicios de Biblioteca] as NEG
+}
+package "Acceso a datos" {
+  [Repositorios] as REP
+}
+database "PostgreSQL" as DB
+cloud "Identidad institucional" as SSO
+cloud "API Sistema Academico" as ACAD
+Estudiante --> UI
+Bibliotecario --> UI
+UI --> NEG
+NEG --> REP
+REP --> DB
+NEG --> SSO
+NEG --> ACAD
+note right of NEG
+Segunda alternativa: 4,05.
+Se descarta frente al monolito modular (4,55)
+porque los limites por dominio son menos explicitos
+y existe mayor riesgo de acoplamiento al crecer.
+end note
+@enduml
