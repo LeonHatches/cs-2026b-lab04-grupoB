@@ -1,0 +1,43 @@
+flowchart LR
+    U[Estudiantes]
+    B[Bibliotecarios]
+
+    subgraph FRONT["Frontend"]
+        A[Framework]
+    end
+
+    subgraph BACK["Backend - Monolito Modular"]
+        M1[Modulo Usuarios y Autenticacion]
+        M2[Modulo Catalogo]
+        M3[Modulo Reservas]
+        M4[Modulo Prestamos]
+        M5[Modulo Multas]
+        M6[Modulo Integracion Academica]
+    end
+
+    DB[(PostgreSQL)]
+
+    AUTH[Servicio de autenticacion institucional]
+    API[API del sistema academico]
+
+    U --> A
+    B --> A
+
+    A --> M1
+    A --> M2
+    A --> M3
+    A --> M4
+    A --> M5
+
+    M1 --> DB
+    M2 --> DB
+    M3 --> DB
+    M4 --> DB
+    M5 --> DB
+
+    M1 --> M6
+    M3 --> M6
+    M4 --> M6
+
+    M6 --> AUTH
+    M6 --> API
