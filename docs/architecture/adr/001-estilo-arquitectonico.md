@@ -1,7 +1,7 @@
 # ADR-001: Adoptar un monolito modular para BiblioUNSA
 
 - Estado: Aceptado
-- Fecha: 2026-01-10
+- Fecha: 2026-10-01
 - Decisores: Equipo BiblioUNSA (3 developers)
 
 ## Contexto

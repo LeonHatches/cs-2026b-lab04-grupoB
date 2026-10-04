@@ -2,11 +2,11 @@
 
 - Estado: Aceptado
 - Fecha: 2026-10-02
-- Decisores: Grupo 3
+- Decisores: equipo BiblioUNSA
 
 ## Contexto
 
-RF-06 indica que BiblioUNSA debe validar que el estudiante tenga matrícula vigente.
+RF-05 indica que BiblioUNSA debe validar que el estudiante tenga matrícula vigente.
 
 R-04 establece que el sistema académico debe consultarse mediante API y no mediante acceso directo a su base de datos.
 
