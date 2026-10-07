@@ -1,0 +1,31 @@
+@startuml
+skinparam packageStyle rectangle
+title BiblioUNSA - Paquetes según ADR-001
+package "bibliounsa" {
+ package "usuarios_autenticacion" as USU
+ package "catalogo" as CAT
+ package "reservas" as RES
+ package "prestamos" as PRE
+ package "multas" as MUL
+ package "integracion_academica" as INT
+ package "compartido" as COM
+}
+RES ..> CAT : consulta Ejemplar
+RES ..> INT : ServicioMatricula (puerto)
+RES ..> USU : identifica Estudiante
+PRE ..> RES : consume reserva confirmada
+PRE ..> CAT : actualiza disponibilidad
+PRE ..> USU : valida bibliotecario
+MUL ..> PRE : consulta préstamo vencido
+USU ..> INT : autenticación institucional (puerto)
+CAT ..> COM : identificadores
+RES ..> COM : identificadores
+PRE ..> COM : identificadores
+MUL ..> COM : identificadores
+INT ..> COM : contratos
+note bottom of INT
+ ADR-001: monolito modular, sin dependencias cíclicas.
+ ADR-003: integración académica exclusivamente mediante API.
+ El adaptador reside en integracion_academica.
+end note
+@enduml

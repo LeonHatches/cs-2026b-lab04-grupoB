@@ -1,0 +1,43 @@
+@startuml
+skinparam shadowing false
+autonumber
+title BiblioUNSA - Reservar un libro
+actor Estudiante
+participant "Web BiblioUNSA" as UI
+participant "ReservaController" as C
+participant "ServicioReservas" as S
+participant "ServicioMatricula" as M
+participant "RepositorioEjemplares" as E
+participant "Ejemplar" as J
+participant "RepositorioReservas" as R
+participant "NotificadorReservas" as N
+Estudiante -> UI : Seleccionar ejemplar y reservar
+UI -> C : crearReserva(estudianteId, ejemplarId)
+C -> S : reservar(estudianteId, ejemplarId)
+S -> M : validarVigente(estudianteId)
+alt matrícula vigente
+ M --> S : true
+ S -> E : buscar(ejemplarId)
+ E --> S : ejemplar
+ S -> J : verificarDisponible()
+ alt ejemplar disponible
+  J --> S : true
+  loop intento transaccional (máximo 1 reintento)
+   S -> R : reservarAtomicamente(estudianteId, ejemplarId)
+   R --> S : reserva RESERVADA o conflicto
+  end
+  opt reserva creada
+   S ->> N : enviarConfirmacion(reserva)
+  end
+  S --> C : reserva / conflicto
+ else ejemplar no disponible
+  J --> S : false
+  S --> C : error DISPONIBILIDAD
+ end
+else matrícula no vigente o API no disponible
+ M --> S : false / error
+ S --> C : error MATRICULA
+end
+C --> UI : ResultadoReserva
+UI --> Estudiante : Mostrar confirmación o error
+@enduml

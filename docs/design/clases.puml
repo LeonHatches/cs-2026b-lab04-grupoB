@@ -1,0 +1,93 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+title BiblioUNSA - Diseño de clases: reserva y matrícula
+class Estudiante {
+ - id: UUID
+ - correoInstitucional: String
+ + puedeSolicitarReserva(): bool
+}
+class Libro {
+ - isbn: String
+ - titulo: String
+ - autor: String
+ + consultarEjemplares(): List<Ejemplar>
+}
+class Ejemplar {
+ - id: UUID
+ - codigoQR: String
+ - disponibilidad: DisponibilidadEjemplar
+ + verificarDisponible(): bool
+ + marcarReservado(): void
+ + liberar(): void
+}
+enum DisponibilidadEjemplar { DISPONIBLE; RESERVADO; PRESTADO }
+class Reserva {
+ - id: UUID
+ - fechaCreacion: DateTime
+ - estado: EstadoReserva
+ + confirmar(): void
+ + cancelar(): void
+ + expirar(): void
+ + registrarPrestamo(): void
+}
+enum EstadoReserva { SOLICITADA; VALIDANDO; RESERVADA; RECHAZADA; CANCELADA; EXPIRADA; CONVERTIDA_PRESTAMO }
+enum EstadoPrestamo { RESERVADO; PRESTADO; VENCIDO; CON_MULTA; DEVUELTO; CANCELADO; EXPIRADO }
+class Prestamo {
+ - estado: EstadoPrestamo
+ + reservar(): void
+ + registrarPrestamo(): void
+ + marcarVencido(): void
+ + calcularMulta(): void
+ + registrarDevolucion(): void
+ + cancelar(): void
+ + expirar(): void
+}
+Prestamo --> EstadoPrestamo
+Reserva "0..1" --> "0..1" Prestamo : genera
+class ServicioReservas {
+ + reservar(estudianteId: UUID, ejemplarId: UUID): Reserva
+ + cancelarReserva(reservaId: UUID): void
+}
+class ReservaController {
+ + crearReserva(estudianteId: UUID, ejemplarId: UUID): ResultadoReserva
+}
+class ResultadoReserva {
+ + exito: bool
+ + mensaje: String
+}
+interface ServicioMatricula <<puerto>> {
+ + validarVigente(estudianteId: UUID): bool
+}
+class ApiAcademicaAdapter <<adaptador>> {
+ + validarVigente(estudianteId: UUID): bool
+}
+interface RepositorioReservas <<puerto>> {
+ + reservarAtomicamente(estudianteId: UUID, ejemplarId: UUID): Reserva
+ + buscar(id: UUID): Reserva
+ + guardar(reserva: Reserva): void
+}
+interface RepositorioEjemplares <<puerto>> {
+ + buscar(id: UUID): Ejemplar
+}
+interface NotificadorReservas <<puerto>> {
+ + enviarConfirmacion(reserva: Reserva): void
+}
+Estudiante "1" -- "0..*" Reserva : realiza
+Libro "1" o-- "0..*" Ejemplar : cataloga
+Ejemplar "1" -- "0..*" Reserva : historial
+Reserva --> EstadoReserva
+Ejemplar --> DisponibilidadEjemplar
+ServicioMatricula <|.. ApiAcademicaAdapter
+ServicioReservas ..> RepositorioReservas
+ServicioReservas ..> RepositorioEjemplares
+ServicioReservas ..> ServicioMatricula
+ServicioReservas ..> NotificadorReservas
+ServicioReservas ..> Reserva
+ReservaController ..> ServicioReservas
+ReservaController ..> ResultadoReserva
+note right of RepositorioReservas
+ La unicidad de reserva activa por ejemplar
+ se garantiza con transacción PostgreSQL.
+end note
+@enduml

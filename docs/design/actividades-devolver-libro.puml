@@ -1,0 +1,37 @@
+@startuml
+skinparam shadowing false
+title BiblioUNSA - Devolución y cálculo de multa
+|Estudiante|
+start
+:Entrega el ejemplar;
+|Bibliotecario|
+:Escanea el carné QR y el ejemplar;
+|Sistema BiblioUNSA|
+:Buscar préstamo activo;
+if (¿Préstamo encontrado?) then (sí)
+ :Calcular fecha límite y retraso;
+ if (¿Existe retraso?) then (sí)
+  :Calcular y registrar multa;
+  fork
+   :Actualizar estado a DEVUELTO;
+  fork again
+   :Generar notificación de multa;
+  end fork
+ else (no)
+  fork
+   :Actualizar estado a DEVUELTO;
+  fork again
+   :Generar comprobante sin multa;
+  end fork
+ endif
+ :Liberar ejemplar en catálogo;
+ |Bibliotecario|
+ :Confirmar devolución;
+ |Estudiante|
+ :Recibir comprobante;
+else (no)
+ |Bibliotecario|
+ :Informar inconsistencia y verificar datos;
+endif
+stop
+@enduml
