@@ -1,10 +1,12 @@
-# E7 — Bitácora de apoyo de IA, 07/10/2026
-Las siguientes son **interacciones de diseño propuestas/documentadas en esta preparación**, no una transcripción de conversaciones verificadas en servicios externos. El equipo debe revisar y validar antes de entregar.
-| # | Herramienta | Instrucción/consulta | Propuesta | Verificación y decisión |
-|---|---|---|---|---|
-| 1 | ChatGPT | Modelar HU de reserva según ADR-001 a 003 | `Estudiante`, `Ejemplar`, `Reserva`, puertos | Aceptar clases del dominio; separar interfaz académica |
-| 2 | ChatGPT | Generar secuencia con casos de error | Validación + transacción + notificación | Aceptar `alt`, `loop`, `opt`; exigir retorno |
-| 3 | ChatGPT | Modelar estados de préstamo | Estados de guía y transiciones | Separar `Prestamo` de `Reserva` y revisar C2 |
-| 4 | ChatGPT | Describir actividad de devolución | Tres carriles y cálculo de multa | Aceptar; ajustar rama sin préstamo |
-| 5 | ChatGPT | Revisar dependencias de paquetes del ADR | Módulos sin ciclos | Rechazar acceso directo a BD académica |
-| 6 | ChatGPT | Contrastar UML con Python | ABC, colecciones, diferencias de nombres | Documentar limitaciones de inferencia |
+# Bitácora de uso de IA — BiblioUNSA
+
+| # | Fecha | Herramienta | Prompt (resumen) | Qué propuso la IA | Qué verificamos o corregimos | Decisión |
+|---|---|---|---|---|---|---|
+| x | 10/10/2026 | ChatGPT | Generar el esqueleto en Python del diagrama de clases realizado anteriormente implementando lógica mínima| Propuso un esqueleto realizado en Python basado en el diagrama de clases que se envio | Se corrigio correcta relación entre las clases dentro del código generado | Corregido |
+
+## Anexo: prompts completos
+
+### Interacción x
+Genera el esqueleto en Python 3.14 del siguiente diagrama de clases de BiblioUNSA, utilizando dataclasses y type hints. Respeta nombre de clases y numeraciones. Convierte los nombres de atributos, parámetros y operaciones a snake_case. Represennta interfaces como clases abstractas mediante ABC y @abstractmethod y las multiplicidades. Implementar únicamente lógica minima. [Diagrama de clases].
+
+
