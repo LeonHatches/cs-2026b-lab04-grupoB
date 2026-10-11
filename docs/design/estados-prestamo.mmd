@@ -1,12 +1,12 @@
 stateDiagram-v2
- [*] --> Reservado: reservar() [matriculaVigente && disponible]
- Reservado --> Prestado: registrarPrestamo() [retiroValidado]
- Reservado --> Cancelado: cancelar()
- Reservado --> Expirado: expirar() [plazoAgotado]
- Prestado --> Vencido: marcarVencido() [fechaLimiteSuperada]
- Prestado --> Devuelto: registrarDevolucion() [dentroDelPlazo]
- Vencido --> ConMulta: calcularMulta() [diasRetraso > 0]
- ConMulta --> Devuelto: registrarDevolucion() [multaRegistrada]
- Cancelado --> [*]
- Expirado --> [*]
- Devuelto --> [*]
+    [*] --> RESERVADO: reservar() [matriculaVigente && disponible]
+    RESERVADO --> PRESTADO: registrarPrestamo() [retiroValidado]
+    RESERVADO --> CANCELADO: cancelar()
+    RESERVADO --> EXPIRADO: expirar() [plazoAgotado]
+    PRESTADO --> VENCIDO: marcarVencido() [fechaLimiteSuperada]
+    PRESTADO --> DEVUELTO: registrarDevolucion() [dentroDelPlazo]
+    VENCIDO --> CON_MULTA: calcularMulta() [diasRetraso > 0]
+    CON_MULTA --> DEVUELTO: registrarDevolucion() [multaRegistrada]
+    CANCELADO --> [*]
+    EXPIRADO --> [*]
+    DEVUELTO --> [*]
