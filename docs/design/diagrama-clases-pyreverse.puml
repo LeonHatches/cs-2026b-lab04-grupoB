@@ -1,0 +1,103 @@
+@startuml classes_reservas
+set namespaceSeparator none
+class "ApiAcademicaAdapter" as reservas.reservas.ApiAcademicaAdapter {
+  {abstract}validar_vigente(estudiante_id: UUID) -> bool
+}
+class "DisponibilidadEjemplar" as reservas.reservas.DisponibilidadEjemplar {
+  name
+}
+class "Ejemplar" as reservas.reservas.Ejemplar {
+  codigo_qr : str
+  disponibilidad
+  historial_reservas : list[Reserva]
+  id : UUID
+  libro
+  liberar() -> None
+  marcar_reservado() -> None
+  verificar_disponible() -> bool
+}
+class "EstadoPrestamo" as reservas.reservas.EstadoPrestamo {
+  name
+}
+enum "EstadoReserva" as reservas.reservas.EstadoReserva {
+  name
+}
+class "Estudiante" as reservas.reservas.Estudiante {
+  correo_institucional : str
+  id : UUID
+  reservas : list[Reserva]
+  {abstract}puede_solicitar_reserva() -> bool
+}
+class "Libro" as reservas.reservas.Libro {
+  autor : str
+  ejemplares : list[Ejemplar]
+  isbn : str
+  titulo : str
+  {abstract}consultar_ejemplares() -> list[Ejemplar]
+}
+class "NotificadorReservas" as reservas.reservas.NotificadorReservas {
+  {abstract}enviar_confirmacion(reserva: Reserva) -> None
+}
+class "Prestamo" as reservas.reservas.Prestamo {
+  estado
+  reserva : Reserva | None
+  calcular_multa() -> None
+  cancelar() -> None
+  expirar() -> None
+  marcar_vencido() -> None
+  registrar_devolucion() -> None
+  registrar_prestamo() -> None
+  reservar() -> None
+}
+class "RepositorioEjemplares" as reservas.reservas.RepositorioEjemplares {
+  {abstract}buscar(id: UUID) -> Ejemplar
+}
+class "RepositorioReservas" as reservas.reservas.RepositorioReservas {
+  {abstract}buscar(id: UUID) -> Reserva
+  {abstract}guardar(reserva: Reserva) -> None
+  {abstract}reservar_atomicamente(estudiante_id: UUID, ejemplar_id: UUID) -> Reserva
+}
+class "Reserva" as reservas.reservas.Reserva {
+  ejemplar
+  estado
+  estudiante
+  fecha_creacion : datetime
+  id : UUID
+  prestamo : Prestamo | None
+  cancelar() -> None
+  confirmar() -> None
+  expirar() -> None
+  registrar_prestamo() -> None
+}
+class "ReservaController" as reservas.reservas.ReservaController {
+  servicio_reservas
+  {abstract}crear_reserva(estudiante_id: UUID, ejemplar_id: UUID) -> ResultadoReserva
+}
+class "ResultadoReserva" as reservas.reservas.ResultadoReserva {
+  exito : bool
+  mensaje : str
+}
+class "ServicioMatricula" as reservas.reservas.ServicioMatricula {
+  {abstract}validar_vigente(estudiante_id: UUID) -> bool
+}
+class "ServicioReservas" as reservas.reservas.ServicioReservas {
+  notificador_reservas
+  repositorio_ejemplares
+  repositorio_reservas
+  servicio_matricula
+  {abstract}cancelar_reserva(reserva_id: UUID) -> None
+  {abstract}reservar(estudiante_id: UUID, ejemplar_id: UUID) -> Reserva
+}
+reservas.reservas.ApiAcademicaAdapter --|> reservas.reservas.ServicioMatricula
+reservas.reservas.Ejemplar --> reservas.reservas.DisponibilidadEjemplar : disponibilidad
+reservas.reservas.Reserva --> reservas.reservas.Ejemplar : ejemplar
+reservas.reservas.Prestamo --> reservas.reservas.EstadoPrestamo : estado
+reservas.reservas.Reserva --> reservas.reservas.EstadoReserva : estado
+reservas.reservas.Reserva --> reservas.reservas.Estudiante : estudiante
+reservas.reservas.Ejemplar --> reservas.reservas.Libro : libro
+reservas.reservas.ServicioReservas --> reservas.reservas.NotificadorReservas : notificador_reservas
+reservas.reservas.ServicioReservas --> reservas.reservas.RepositorioEjemplares : repositorio_ejemplares
+reservas.reservas.ServicioReservas --> reservas.reservas.RepositorioReservas : repositorio_reservas
+reservas.reservas.ServicioReservas --> reservas.reservas.ServicioMatricula : servicio_matricula
+reservas.reservas.ReservaController --> reservas.reservas.ServicioReservas : servicio_reservas
+@enduml
