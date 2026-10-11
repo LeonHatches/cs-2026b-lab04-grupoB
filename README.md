@@ -65,3 +65,27 @@ flowchart LR
 
 ## Reflexión sobre el uso de la IA
 La IA fue útil para proponer alternativas arquitectónicas, comparando ventajas y riesgos, lo que fue útil para la elaboración de matriz de decisión y así elegir la arquitectura para el proyecto, tomando en cuenta los requisitos y restricciones del proyecto elegido. Sin embargo, en algunos casos la IA realizó afirmaciones que no tomaban en cuenta todas las restricciones del proyecto, como la cantidad de integrantes y el tiempo que se tiene en cuenta para tener el MVP. Gracias a ello, algunas respuestas tuvieron que ser corregidas para poder aceptarlas posteriormente. En conclusión, la IA es una gran herramienta que acelera el proceso de desarrollo de forma eficaz, aunque a veces deba ser corregida.
+
+## Diseño UML (Lab 05)
+``` mermaid
+stateDiagram-v2
+    [*] --> RESERVADO: reservar() [matriculaVigente && disponible]
+    RESERVADO --> PRESTADO: registrarPrestamo() [retiroValidado]
+    RESERVADO --> CANCELADO: cancelar()
+    RESERVADO --> EXPIRADO: expirar() [plazoAgotado]
+    PRESTADO --> VENCIDO: marcarVencido() [fechaLimiteSuperada]
+    PRESTADO --> DEVUELTO: registrarDevolucion() [dentroDelPlazo]
+    VENCIDO --> CON_MULTA: calcularMulta() [diasRetraso > 0]
+    CON_MULTA --> DEVUELTO: registrarDevolucion() [multaRegistrada]
+    CANCELADO --> [*]
+    EXPIRADO --> [*]
+    DEVUELTO --> [*]
+```
+
+## Diagramas de diseño
+- [Diagrama de clases](docs/design/img/clases.png)
+- [Diagrama de secuencia del flujo crítico](docs/design/img/secuencia-reservar-libro.png)
+- [Diagrama de estados](docs/design/img/estados-prestamo.png)
+- [Diagrama de actividades](docs/design/img/actividades-devolver-libro.png)
+- [Diagrama de paquetes](docs/design/img/paquetes.png)
+- [Diagrama generado con pyreverse](docs/design/img/diagrama-clases-pyreverse.png)
