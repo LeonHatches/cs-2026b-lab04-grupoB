@@ -21,7 +21,11 @@ class Ejemplar {
  + marcarReservado(): void
  + liberar(): void
 }
-enum DisponibilidadEjemplar { DISPONIBLE; RESERVADO; PRESTADO }
+enum DisponibilidadEjemplar {
+ DISPONIBLE
+ RESERVADO
+ PRESTADO
+}
 class Reserva {
  - id: UUID
  - fechaCreacion: DateTime
@@ -31,8 +35,24 @@ class Reserva {
  + expirar(): void
  + registrarPrestamo(): void
 }
-enum EstadoReserva { SOLICITADA; VALIDANDO; RESERVADA; RECHAZADA; CANCELADA; EXPIRADA; CONVERTIDA_PRESTAMO }
-enum EstadoPrestamo { RESERVADO; PRESTADO; VENCIDO; CON_MULTA; DEVUELTO; CANCELADO; EXPIRADO }
+enum EstadoReserva {
+ SOLICITADA
+ VALIDANDO
+ RESERVADA
+ RECHAZADA
+ CANCELADA
+ EXPIRADA
+ CONVERTIDA_PRESTAMO
+}
+enum EstadoPrestamo {
+ RESERVADO
+ PRESTADO
+ VENCIDO
+ CON_MULTA
+ DEVUELTO
+ CANCELADO
+ EXPIRADO
+}
 class Prestamo {
  - estado: EstadoPrestamo
  + reservar(): void
