@@ -25,6 +25,9 @@ MUL ..> COM : identificadores
 INT ..> COM : contratos
 note bottom of INT
  ADR-001: monolito modular, sin dependencias cíclicas.
+ El módulo Autenticación/Integración de ADR-001 se detalla
+ en usuarios_autenticacion e integracion_academica.
+ compartido agrupa los identificadores y contratos comunes.
  ADR-003: integración académica exclusivamente mediante API.
  El adaptador reside en integracion_academica.
 end note
