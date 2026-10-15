@@ -1,0 +1,14 @@
+@startuml
+!include <C4/C4_Context>
+title BiblioUNSA - E6: contexto manual (comparar con exportación DSL)
+Person(est, "Estudiante", "Consulta y reserva")
+Person(bib, "Bibliotecario", "Gestiona préstamos")
+System(bibliounsa, "BiblioUNSA", "Sistema bibliotecario")
+System_Ext(academico, "Sistema académico UNSA", "Matrícula vigente")
+System_Ext(identidad, "Autenticación institucional", "Identidad UNSA")
+Rel(est, bibliounsa, "Consulta y reserva")
+Rel(bib, bibliounsa, "Presta y recibe libros")
+Rel(bibliounsa, academico, "Valida matrícula", "HTTPS/JSON")
+Rel(bibliounsa, identidad, "Autentica usuarios", "HTTPS (por verificar)")
+SHOW_LEGEND()
+@enduml
