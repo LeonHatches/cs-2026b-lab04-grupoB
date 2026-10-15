@@ -1,20 +1,18 @@
-# E1 — Inventario C4 de BiblioUNSA (borrador por verificar)
+# Inventario — BiblioUNSA
 
-| Elemento | Tipo C4 | Origen | Validación |
-|---|---|---|---|
-| Estudiante | Persona | Lab 04, drivers.md | Confirmar |
-| Bibliotecario | Persona | Lab 04, drivers.md | Confirmar |
-| BiblioUNSA | Software system | Lab 04, arquitectura.mmd | Confirmar |
-| Sistema académico UNSA | Sistema externo | ADR-003 | Confirmar |
-| Identidad institucional | Sistema externo | Lab 04, arquitectura.mmd | Confirmar |
-| Interfaz web | Contenedor | Lab 04, arquitectura.mmd (frontend) | Confirmar tecnología específica |
-| Aplicación backend / API | Contenedor | ADR-001, monolito modular | Confirmar tecnología específica |
-| PostgreSQL | Contenedor de base de datos | ADR-002 | Confirmar |
-| Usuarios y autenticación | Componente de API | Lab 05, paquetes.puml | Confirmar |
-| Catálogo | Componente de API | Lab 05, paquetes.puml | Confirmar |
-| Reservas | Componente de API | Lab 05, paquetes.puml | Confirmar |
-| Préstamos | Componente de API | Lab 05, paquetes.puml | Confirmar |
-| Multas | Componente de API | Lab 05, paquetes.puml | Confirmar |
-| Integración académica | Componente de API | Lab 05, paquetes.puml | Confirmar |
-
-**Pendientes importantes:** decidir si corresponde modelar un servicio de correo como tercer sistema externo y/o una tarea programada de multas como cuarto contenedor. La guía los menciona como posibilidades, no evidencia de que ya se implementaron.
+| Elemento | Tipo C4 | Origen |
+|---|---|---|
+| Estudiante | Persona | drivers.md (Lab 04) |
+| Bibliotecario | Persona | drivers.md (Lab 04) |
+| BiblioUNSA | Sistema de software | Caso |
+| Sistema Académico UNSA | Sistema externo | ADR-003 (Lab 05) |
+| Autenticación institucional | Sistema externo | arquitectura.mmd (Lab 04) |
+| Aplicación web | Contenedor | arquitectura.mmd (Lab 04) |
+| API | Contenedor | ADR-001 (Lab 04) |
+| Base de datos | Contenedor | ADR-002 (Lab 04) |
+| Usuarios y autenticación | Componente (de la API) | paquetes.puml (Lab 05) |
+| Catálogo | Componente (de la API) | paquetes.puml (Lab 05) |
+| Reservas | Componente (de la API) | paquetes.puml (Lab 05) |
+| Préstamos | Componente (de la API) | paquetes.puml (Lab 05) |
+| Multas | Componente (de la API) | paquetes.puml (Lab 05) |
+| Integración académica | Componente (de la API) | paquetes.puml (Lab 05) |

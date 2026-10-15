@@ -1,4 +1,4 @@
-workspace "BiblioUNSA" "Modelo C4 de BiblioUNSA basado en Laboratorios 04 y 05" {
+workspace "BiblioUNSA" "Modelo C4" {
     !identifiers hierarchical
 
     model {
@@ -38,7 +38,8 @@ workspace "BiblioUNSA" "Modelo C4 de BiblioUNSA basado en Laboratorios 04 y 05" 
     }
 
     views {
-        systemContext bibliounsa "Contexto" "E1: personas y sistemas externos de BiblioUNSA" {
+        systemContext bibliounsa "Contexto" "Modelo C4 - Contexto" {
+            title "Diagrama de Contexto - BiblioUnsa"
             include *
             autolayout lr
         }
@@ -54,13 +55,34 @@ workspace "BiblioUNSA" "Modelo C4 de BiblioUNSA basado en Laboratorios 04 y 05" 
         // E5: Hatches debe agregar en model el deploymentEnvironment Producción
         // y aquí una vista deployment referida a ese entorno.
         styles {
-            element "Person" { shape person background #08427B color #ffffff }
-            element "Software System" { background #1168BD color #ffffff }
-            element "Externo" { background #999999 color #ffffff }
-            element "Container" { background #438DD5 color #ffffff }
-            element "Component" { background #85BBF0 color #000000 }
-            element "Database" { shape cylinder }
-            element "Web Browser" { shape WebBrowser }
+            element "Person" {
+                shape person 
+                background #08427B 
+                color #ffffff 
+            }
+            element "Software System" {
+                background #1168BD
+                color #ffffff
+            }
+            element "Externo" {
+                background #999999
+                color #ffffff
+            }
+            element "Container" { 
+                background #438DD5
+                color #ffffff 
+            }
+            element "Component" { 
+                background #85BBF0 
+                color #000000 
+            }
+            element "Database" { 
+                shape cylinder
+            }
+            element "Web Browser" {
+                shape WebBrowser 
+            }
         }
     }
 }
+
