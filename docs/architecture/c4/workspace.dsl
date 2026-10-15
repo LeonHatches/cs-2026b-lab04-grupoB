@@ -7,7 +7,7 @@ workspace "BiblioUNSA" "Modelo C4" {
 
         bibliounsa = softwareSystem "BiblioUNSA" "Sistema de catálogo, reservas y préstamos de bibliotecas UNSA." {
             web = container "Aplicación Web" "Presentación para estudiantes y bibliotecarios." "Angular" "Web Browser"
-            api = container "API" "Backend de monolito modular." "Django" {
+            api = container "Backend API" "Backend de monolito modular." "Django" {
                 usuarios = component "Usuarios y autenticación" "Identidad, perfiles y acceso institucional." "Módulo backend"
                 catalogo = component "Catálogo" "Consulta libros y ejemplares." "Módulo backend"
                 reservas = component "Reservas" "Registra reservas y controla conflictos de disponibilidad." "Módulo backend"
@@ -35,6 +35,10 @@ workspace "BiblioUNSA" "Modelo C4" {
         bibliounsa.api.prestamos -> bibliounsa.api.reservas "Consume reserva confirmada"
         bibliounsa.api.prestamos -> bibliounsa.api.catalogo "Actualiza disponibilidad"
         bibliounsa.api.multas -> bibliounsa.api.prestamos "Consulta préstamos vencidos"
+        bibliounsa.api.reservas -> bibliounsa.api.usuarios "Identifica estudiante"
+        bibliounsa.api.prestamos -> bibliounsa.api.usuarios "Valida bibliotecario"
+        bibliounsa.api.usuarios -> bibliounsa.api.integracion "Solicita autenticación institucional"
+        
     }
 
     views {
@@ -48,7 +52,8 @@ workspace "BiblioUNSA" "Modelo C4" {
             include *
             autolayout lr
         }
-        component bibliounsa.api "Componentes" "E3: componentes internos de aplicación BiblioUNSA" {
+        component bibliounsa.api "Componentes" "Modelo C4 - Componentes" {
+            title "Diagrama de Componentes - BiblioUnsa"
             include *
             autolayout lr
         }

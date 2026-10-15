@@ -3,6 +3,8 @@
 | # | Fecha | Herramienta | Prompt (resumen) | Qué propuso la IA | Qué verificamos o corregimos | Decisión |
 |---|---|---|---|---|---|---|
 | 1 | 15/10/2026 | ChatGPT | Analizar inventario, ADR-001 y depliegue para estructrar un modelo C4 base como borrador | Borrador de modelo C4 completo con vistas y relaciones de todos los diagramas del modelo | Se verifico que todos los sistemas externos y personas sean representados de forma correcta, se corrigio la inclusión de un sistema externo extra | Corregida |
+| 1 | 15/10/2026 | ChatGPT | Analizar inventario, ADR-001 y depliegue para estructrar un modelo C4 base como borrador | Se corrigio el nombre de contenedores y se específico la tecnología que faltaba por contenedor | componentes que faltaban en el diagrama de componentes de C4 como  | Corregida |
+| 1 | 15/10/2026 | ChatGPT | Analizar inventario, ADR-001 y depliegue para estructrar un modelo C4 base como borrador | Borrador de modelo C4 completo con vistas y relaciones de todos los diagramas del modelo | Se corrigio agrengando relaciones entre los componentes que faltaban en el diagrama de componentes de C4 como  | Corregida |
 
 ## Anexo: prompts completos
 
