@@ -6,8 +6,8 @@ workspace "BiblioUNSA" "Modelo C4" {
         bibliotecario = person "Bibliotecario" "Registra préstamos, devoluciones y multas."
 
         bibliounsa = softwareSystem "BiblioUNSA" "Sistema de catálogo, reservas y préstamos de bibliotecas UNSA." {
-            web = container "Interfaz web" "Presentación para estudiantes y bibliotecarios." "Aplicación web" "Web Browser"
-            api = container "Aplicación BiblioUNSA" "Backend de monolito modular que expone casos de uso." "Python / Django (por confirmar)" {
+            web = container "Aplicación Web" "Presentación para estudiantes y bibliotecarios." "Angular" "Web Browser"
+            api = container "API" "Backend de monolito modular." "Django" {
                 usuarios = component "Usuarios y autenticación" "Identidad, perfiles y acceso institucional." "Módulo backend"
                 catalogo = component "Catálogo" "Consulta libros y ejemplares." "Módulo backend"
                 reservas = component "Reservas" "Registra reservas y controla conflictos de disponibilidad." "Módulo backend"
@@ -23,7 +23,7 @@ workspace "BiblioUNSA" "Modelo C4" {
         estudiante -> bibliounsa "Consulta catálogo y solicita reservas"
         bibliotecario -> bibliounsa "Registra préstamos y devoluciones"
         bibliounsa -> academico "Consulta matrícula vigente" "HTTPS/JSON"
-        bibliounsa -> identidad "Autentica usuarios" "HTTPS (protocolo por verificar)"
+        bibliounsa -> identidad "Autentica usuarios" "HTTPS"
         estudiante -> bibliounsa.web "Usa el portal" "HTTPS"
         bibliotecario -> bibliounsa.web "Usa el portal" "HTTPS"
         bibliounsa.web -> bibliounsa.api "Solicita operaciones de biblioteca" "HTTPS/JSON"
@@ -43,7 +43,8 @@ workspace "BiblioUNSA" "Modelo C4" {
             include *
             autolayout lr
         }
-        container bibliounsa "Contenedores" "E2: contenedores del sistema BiblioUNSA" {
+        container bibliounsa "Contenedores" "Modelo C4 - Contenedores" {
+            title "Diagrama de Contenedores - BiblioUnsa"
             include *
             autolayout lr
         }
