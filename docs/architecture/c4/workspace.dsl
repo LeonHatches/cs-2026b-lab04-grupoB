@@ -45,7 +45,27 @@ workspace "BiblioUNSA" "Modelo C4" {
         bibliounsa.api.catalogo -> bibliounsa.db "Consulta disponibilidad de ejemplares" "SQL/TCP"
         bibliounsa.api.reservas -> bibliounsa.db "Registra una reserva activa mediante transacción" "SQL/TCP"
 
-
+        // E5: topología del Lab 04; es un diseño, no infraestructura ya contratada.
+        produccion = deploymentEnvironment "Producción" {
+            deploymentNode "Dispositivo del usuario" "Equipo o celular del estudiante o bibliotecario; no se exige un SO específico." "Navegador web" {
+                deploymentNode "Navegador" "Ejecuta la aplicación Angular y accede a la API mediante HTTPS." "JavaScript / Angular" {
+                    containerInstance bibliounsa.web
+                }
+            }
+            deploymentNode "Servidor en la nube" "Servidor único propuesto para el MVP de bajo presupuesto, según el despliegue del Lab 04." "SO y capacidad por definir" {
+                properties {
+                    "Origen" "docs/architecture/diagramas/despliegue.py"
+                    "Restricción" "R-03: presupuesto bajo; justificar servicios de pago"
+                    "Pendiente" "Confirmar proveedor, SO, CPU, RAM y costo antes de contratar"
+                }
+                deploymentNode "Entorno de aplicación" "Nginx atiende HTTPS y dirige las solicitudes al monolito Django." "Nginx / Python / Django" {
+                    containerInstance bibliounsa.api
+                }
+                deploymentNode "Servicio de base de datos" "PostgreSQL en el mismo servidor; datos propios de BiblioUNSA y transacciones de reserva." "PostgreSQL" {
+                    containerInstance bibliounsa.db
+                }
+            }
+        }
     }
 
     views {
@@ -76,7 +96,11 @@ workspace "BiblioUNSA" "Modelo C4" {
             7: bibliounsa.api.reservas -> bibliounsa.db "Confirma reserva y actualiza ejemplar en una transacción; rechaza conflicto"
             autolayout lr
         }
-        // E5: pendiente agregar el entorno y la vista de despliegue.
+        deployment bibliounsa produccion "DespliegueProduccion" "Despliegue propuesto del MVP; proveedor, SO y capacidad pendientes de confirmar." {
+            title "BiblioUNSA - Despliegue en Producción"
+            include *
+            autolayout lr
+        }
         styles {
             element "Person" {
                 shape person 

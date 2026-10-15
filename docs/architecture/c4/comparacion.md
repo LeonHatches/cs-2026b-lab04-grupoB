@@ -18,3 +18,11 @@ La secuencia del Lab 05 detalla objetos y métodos, retornos, alternativas de er
 La vista dinámica C4 resume en siete pasos el flujo exitoso entre estudiante, Web, componentes del backend, API académica y PostgreSQL.
 Los controladores y repositorios del UML quedan abstraídos por Reservas, Catálogo y sus relaciones con la base de datos; se conserva la validación previa a la reserva atómica.
 La secuencia sirve al desarrollador para implementar y probar cada caso; la dinámica sirve al equipo técnico para explicar la colaboración arquitectónica.
+
+## E5 — Trazabilidad del despliegue
+
+- `../diagramas/despliegue.py` propone un servidor en la nube con Nginx, el monolito y PostgreSQL, además de acceso desde navegador/celular.
+- ADR-001 justifica el monolito; ADR-002, PostgreSQL y las transacciones; R-03 de `../drivers.md`, el presupuesto bajo.
+- Se incluye una instancia de cada contenedor de E2: Web en el navegador, API en el entorno de aplicación y PostgreSQL en el servicio de datos del mismo servidor.
+- No se han definido proveedor, SO, CPU, RAM ni costo en los artefactos revisados; el modelo los marca como pendientes de confirmar. No se declara infraestructura contratada o desplegada.
+- Las llamadas a los sistemas institucionales siguen siendo relaciones del modelo; su infraestructura es externa y no se administra como parte del despliegue de BiblioUNSA.
