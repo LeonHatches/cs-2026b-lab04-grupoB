@@ -38,7 +38,14 @@ workspace "BiblioUNSA" "Modelo C4" {
         bibliounsa.api.reservas -> bibliounsa.api.usuarios "Identifica estudiante"
         bibliounsa.api.prestamos -> bibliounsa.api.usuarios "Valida bibliotecario"
         bibliounsa.api.usuarios -> bibliounsa.api.integracion "Solicita autenticación institucional"
-        
+
+        // E4: el endpoint de reserva se detalla dentro del backend (secuencia del Lab 05).
+        bibliounsa.web -> bibliounsa.api.reservas "Solicita reservar un ejemplar mediante la API" "HTTPS/JSON"
+        // Los repositorios del UML se abstraen como acceso a PostgreSQL, según ADR-002.
+        bibliounsa.api.catalogo -> bibliounsa.db "Consulta disponibilidad de ejemplares" "SQL/TCP"
+        bibliounsa.api.reservas -> bibliounsa.db "Registra una reserva activa mediante transacción" "SQL/TCP"
+
+
     }
 
     views {
@@ -57,9 +64,19 @@ workspace "BiblioUNSA" "Modelo C4" {
             include *
             autolayout lr
         }
-        // E4: Hatches debe agregar aquí una vista dynamic del caso Reservar libro
-        // E5: Hatches debe agregar en model el deploymentEnvironment Producción
-        // y aquí una vista deployment referida a ese entorno.
+        // El alcance del backend permite mostrar sus componentes, la Web y el sistema externo.
+        dynamic bibliounsa.api "DinamicaReserva" "Flujo exitoso de reserva del Lab 05: estudiante autenticado, matrícula vigente y ejemplar disponible." {
+            title "BiblioUNSA - Dinámica de reserva de un ejemplar"
+            1: estudiante -> bibliounsa.web "Selecciona el ejemplar y solicita reservar"
+            2: bibliounsa.web -> bibliounsa.api.reservas "Envía la solicitud al endpoint de reservas"
+            3: bibliounsa.api.reservas -> bibliounsa.api.integracion "Solicita validar matrícula vigente"
+            4: bibliounsa.api.integracion -> academico "Consulta matrícula mediante API"
+            5: bibliounsa.api.reservas -> bibliounsa.api.catalogo "Solicita comprobar disponibilidad"
+            6: bibliounsa.api.catalogo -> bibliounsa.db "Consulta el estado actual del ejemplar"
+            7: bibliounsa.api.reservas -> bibliounsa.db "Confirma reserva y actualiza ejemplar en una transacción; rechaza conflicto"
+            autolayout lr
+        }
+        // E5: pendiente agregar el entorno y la vista de despliegue.
         styles {
             element "Person" {
                 shape person 
