@@ -1,3 +1,4 @@
+
 name: Lab06 - Validar y exportar C4
 
 on:
@@ -17,50 +18,66 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
+      - name: Preparar carpetas
+        run: |
+          mkdir -p docs/architecture/c4/export/plantuml
+          mkdir -p docs/architecture/c4/export/mermaid
+
       - name: Validar workspace.dsl
         run: |
           docker run --rm \
             -v "$PWD/docs/architecture/c4:/usr/local/structurizr" \
+            -w /usr/local/structurizr \
             structurizr/structurizr:latest \
             validate -workspace workspace.dsl
 
       - name: Exportar PlantUML
         run: |
-          mkdir -p docs/architecture/c4/export/plantuml
           docker run --rm \
             -v "$PWD/docs/architecture/c4:/usr/local/structurizr" \
-            structurizr/cli:latest \
-            export -workspace workspace.dsl \
+            -w /usr/local/structurizr \
+            structurizr/structurizr:latest \
+            export \
+            -workspace workspace.dsl \
             -format plantuml/c4plantuml \
-            -output /usr/local/structurizr/export/plantuml
+            -output export/plantuml
 
       - name: Exportar Mermaid
         run: |
-          mkdir -p docs/architecture/c4/export/mermaid
           docker run --rm \
             -v "$PWD/docs/architecture/c4:/usr/local/structurizr" \
-            structurizr/cli:latest \
-            export -workspace workspace.dsl \
+            -w /usr/local/structurizr \
+            structurizr/structurizr:latest \
+            export \
+            -workspace workspace.dsl \
             -format mermaid \
-            -output /usr/local/structurizr/export/mermaid
-      - name: Diagnosticar archivos generados
+            -output export/mermaid
+
+      - name: Verificar archivos generados
+        shell: bash
         run: |
-          echo "Directorio actual:"
-          pwd
-          echo "Contenido de export:"
-          ls -la docs/architecture/c4/export/
-          echo "Archivos C4 encontrados:"
-          find docs/architecture/c4 -maxdepth 5 -type f
-          echo "Archivos exportados:"
-          find . -type f \( -name "*.puml" -o -name "*.mmd" \)
-            - name: Comprobar exportaciones
-        run: |
-          echo "PlantUML:"
-          find docs/architecture/c4/export/plantuml -type f
-          echo "Mermaid:"
-          find docs/architecture/c4/export/mermaid -type f
-          test "$(find docs/architecture/c4/export/plantuml -type f | wc -l)" -ge 5
-          test "$(find docs/architecture/c4/export/mermaid -type f | wc -l)" -ge 5
+          set -euo pipefail
+
+          echo "Archivos PlantUML:"
+          find docs/architecture/c4/export/plantuml \
+            -type f -name "*.puml" -print
+
+          echo "Archivos Mermaid:"
+          find docs/architecture/c4/export/mermaid \
+            -type f -name "*.mmd" -print
+
+          P=$(find docs/architecture/c4/export/plantuml \
+            -type f -name "*.puml" | wc -l)
+
+          M=$(find docs/architecture/c4/export/mermaid \
+            -type f -name "*.mmd" | wc -l)
+
+          echo "PlantUML: $P archivos"
+          echo "Mermaid: $M archivos"
+
+          test "$P" -ge 5
+          test "$M" -ge 5
+
       - name: Guardar archivos exportados
         uses: actions/upload-artifact@v4
         with:
