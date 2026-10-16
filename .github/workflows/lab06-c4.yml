@@ -43,7 +43,16 @@ jobs:
             export -workspace workspace.dsl \
             -format mermaid \
             -output /usr/local/structurizr/export/mermaid
-
+      - name: Diagnosticar archivos generados
+        run: |
+          echo "Directorio actual:"
+          pwd
+          echo "Contenido de export:"
+          ls -la docs/architecture/c4/export/
+          echo "Archivos C4 encontrados:"
+          find docs/architecture/c4 -maxdepth 5 -type f
+          echo "Archivos exportados:"
+          find . -type f \( -name "*.puml" -o -name "*.mmd" \)
       - name: Guardar archivos exportados
         uses: actions/upload-artifact@v4
         with:
