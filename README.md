@@ -89,3 +89,52 @@ stateDiagram-v2
 - [Diagrama de actividades](docs/design/img/actividades-devolver-libro.png)
 - [Diagrama de paquetes](docs/design/img/paquetes.png)
 - [Diagrama generado con pyreverse](docs/design/img/diagrama-clases-pyreverse.png)
+
+
+---
+
+## Arquitectura C4 (Lab 06)
+
+El modelo C4 de BiblioUNSA describe la arquitectura del sistema en cinco vistas: contexto, contenedores, componentes, dinámica y despliegue. Todas se generan desde un modelo único escrito en Structurizr DSL.
+
+### Diagrama de contexto
+
+```mermaid
+C4Context
+    title Diagrama de Contexto - BiblioUNSA
+
+    Person(estudiante, "Estudiante", "Consulta, reserva y recibe préstamos de libros.")
+    Person(bibliotecario, "Bibliotecario", "Registra préstamos, devoluciones y multas.")
+
+    System(bibliounsa, "BiblioUNSA", "Sistema de catálogo, reservas y préstamos de bibliotecas UNSA.")
+
+    System_Ext(academico, "Sistema académico UNSA", "Proporciona el estado de matrícula mediante API.")
+    System_Ext(identidad, "Autenticación institucional", "Valida credenciales institucionales.")
+
+    Rel(estudiante, bibliounsa, "Consulta catálogo y solicita reservas")
+    Rel(bibliotecario, bibliounsa, "Registra préstamos y devoluciones")
+    Rel(bibliounsa, academico, "Consulta matrícula vigente", "HTTPS/JSON")
+    Rel(bibliounsa, identidad, "Autentica usuarios", "HTTPS")
+```
+
+### Vistas de arquitectura
+
+| Vista | Descripción | Diagrama |
+|---|---|---|
+| Contexto (Nivel 1) | Usuarios y sistemas externos de BiblioUNSA | [Ver contexto](docs/architecture/c4/img/contexto.png) |
+| Contenedores (Nivel 2) | Aplicación Angular, API Django y PostgreSQL | [Ver contenedores](docs/architecture/c4/img/contenedores.png) |
+| Componentes (Nivel 3) | Módulos internos del backend | [Ver componentes](docs/architecture/c4/img/componentes.png) |
+| Dinámica | Flujo de reserva y validación de matrícula | [Ver dinámica](docs/architecture/c4/img/dinamica-exportada.png) |
+| Despliegue | Distribución de contenedores en producción | [Ver despliegue](docs/architecture/c4/img/despliegue-exportado.png) |
+
+### Archivos del modelo
+
+- [Modelo único Structurizr DSL](docs/architecture/c4/workspace.dsl)
+- [Inventario de elementos C4](docs/architecture/c4/inventario.md)
+- [Contexto manual C4-PlantUML](docs/architecture/c4/contexto-manual.puml)
+- [Comparación de diagramas](docs/architecture/c4/comparacion.md)
+- [Revisión de las cinco vistas](docs/architecture/c4/revision-c4.md)
+- [Explicación para público no técnico](docs/architecture/c4/explicacion.md)
+- [Bitácora de IA](docs/architecture/c4/bitacora-ia.md)
+
+Las vistas se validaron y exportaron mediante GitHub Actions a PlantUML y Mermaid, conservando una fuente única de arquitectura.
