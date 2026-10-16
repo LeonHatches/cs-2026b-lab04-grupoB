@@ -52,7 +52,7 @@ workspace "BiblioUNSA" "Modelo C4" {
                     containerInstance bibliounsa.web
                 }
             }
-            deploymentNode "Servidor en la nube" "Servidor único propuesto para el MVP de bajo presupuesto, según el despliegue del Lab 04." "SO y capacidad por definir" {
+            deploymentNode "Servidor en la nube" "Servidor único propuesto para el MVP de bajo presupuesto, según el despliegue del Lab 04." "Servidor único del MVP" {
                 properties {
                     "Origen" "docs/architecture/diagramas/despliegue.py"
                     "Restricción" "R-03: presupuesto bajo; justificar servicios de pago"
@@ -85,7 +85,7 @@ workspace "BiblioUNSA" "Modelo C4" {
             autolayout lr
         }
         // El alcance del backend permite mostrar sus componentes, la Web y el sistema externo.
-        dynamic bibliounsa.api "DinamicaReserva" "Flujo exitoso de reserva del Lab 05: estudiante autenticado, matrícula vigente y ejemplar disponible." {
+        dynamic bibliounsa.api "DinamicaReserva" "Pasos para reservar un ejemplar, desde la solicitud del estudiante hasta la base de datos." {
             title "BiblioUNSA - Dinámica de reserva de un ejemplar"
             1: estudiante -> bibliounsa.web "Selecciona el ejemplar y solicita reservar"
             2: bibliounsa.web -> bibliounsa.api.reservas "Envía la solicitud al endpoint de reservas"
@@ -96,7 +96,7 @@ workspace "BiblioUNSA" "Modelo C4" {
             7: bibliounsa.api.reservas -> bibliounsa.db "Confirma reserva y actualiza ejemplar en una transacción; rechaza conflicto"
             autolayout lr
         }
-        deployment bibliounsa produccion "DespliegueProduccion" "Despliegue propuesto del MVP; proveedor, SO y capacidad pendientes de confirmar." {
+        deployment bibliounsa produccion "DespliegueProduccion" "Dónde se ejecuta cada contenedor de BiblioUNSA en producción." {
             title "BiblioUNSA - Despliegue en Producción"
             include *
             autolayout lr
