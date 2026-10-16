@@ -32,7 +32,7 @@ jobs:
             structurizr/cli:latest \
             export -workspace workspace.dsl \
             -format plantuml/c4plantuml \
-            -output export/plantuml
+            -output /usr/local/structurizr/export/plantuml
 
       - name: Exportar Mermaid
         run: |
@@ -42,7 +42,7 @@ jobs:
             structurizr/cli:latest \
             export -workspace workspace.dsl \
             -format mermaid \
-            -output export/mermaid
+            -output /usr/local/structurizr/export/mermaid
 
       - name: Guardar archivos exportados
         uses: actions/upload-artifact@v4
