@@ -21,7 +21,7 @@ jobs:
         run: |
           docker run --rm \
             -v "$PWD/docs/architecture/c4:/usr/local/structurizr" \
-            structurizr/cli:latest \
+            structurizr/structurizr:latest \
             validate -workspace workspace.dsl
 
       - name: Exportar PlantUML
@@ -53,6 +53,14 @@ jobs:
           find docs/architecture/c4 -maxdepth 5 -type f
           echo "Archivos exportados:"
           find . -type f \( -name "*.puml" -o -name "*.mmd" \)
+            - name: Comprobar exportaciones
+        run: |
+          echo "PlantUML:"
+          find docs/architecture/c4/export/plantuml -type f
+          echo "Mermaid:"
+          find docs/architecture/c4/export/mermaid -type f
+          test "$(find docs/architecture/c4/export/plantuml -type f | wc -l)" -ge 5
+          test "$(find docs/architecture/c4/export/mermaid -type f | wc -l)" -ge 5
       - name: Guardar archivos exportados
         uses: actions/upload-artifact@v4
         with:
