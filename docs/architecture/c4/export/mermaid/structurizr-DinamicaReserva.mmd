@@ -1,0 +1,50 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["BiblioUNSA - Dinámica de reserva de un ejemplar"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    1["<div style='font-weight: bold'>Estudiante</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Consulta, reserva y recibe<br />préstamos de libros.</div>"]
+    style 1 fill:#08427b,stroke:#052e56,color:#ffffff
+
+    13["<div style='font-weight: bold'>Sistema académico UNSA</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Proporciona el estado de<br />matrícula mediante API.</div>"]
+    style 13 fill:#999999,stroke:#6b6b6b,color:#ffffff
+
+    subgraph 3 ["BiblioUNSA"]
+      style 3 fill:#ffffff,stroke:#0b4884,color:#0b4884
+
+      subgraph 5 ["Backend API"]
+        style 5 fill:#ffffff,stroke:#2e6295,color:#2e6295
+
+        11["<div style='font-weight: bold'>Integración académica</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Adaptador para consumir API<br />académica e identidad.</div>"]
+        style 11 fill:#85bbf0,stroke:#5d82a8,color:#000000
+        7["<div style='font-weight: bold'>Catálogo</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Consulta libros y ejemplares.</div>"]
+        style 7 fill:#85bbf0,stroke:#5d82a8,color:#000000
+        8["<div style='font-weight: bold'>Reservas</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Registra reservas y controla<br />conflictos de disponibilidad.</div>"]
+        style 8 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      end
+
+      12[("<div style='font-weight: bold'>Base de datos BiblioUNSA</div><div style='font-size: 70%; margin-top: 0px'>[Container: PostgreSQL]</div><div style='font-size: 80%; margin-top:10px'>Libros, ejemplares, reservas,<br />préstamos y multas.</div>")]
+      style 12 fill:#438dd5,stroke:#2e6295,color:#ffffff
+      4["<div style='font-weight: bold'>Aplicación Web</div><div style='font-size: 70%; margin-top: 0px'>[Container: Angular]</div><div style='font-size: 80%; margin-top:10px'>Presentación para estudiantes<br />y bibliotecarios.</div>"]
+      style 4 fill:#438dd5,stroke:#2e6295,color:#ffffff
+    end
+
+    1["<div style='font-weight: bold'>Estudiante</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Consulta, reserva y recibe<br />préstamos de libros.</div>"]
+    style 1 fill:#08427b,stroke:#052e56,color:#ffffff
+    4["<div style='font-weight: bold'>Aplicación Web</div><div style='font-size: 70%; margin-top: 0px'>[Container: Angular]</div><div style='font-size: 80%; margin-top:10px'>Presentación para estudiantes<br />y bibliotecarios.</div>"]
+    style 4 fill:#438dd5,stroke:#2e6295,color:#ffffff
+    12[("<div style='font-weight: bold'>Base de datos BiblioUNSA</div><div style='font-size: 70%; margin-top: 0px'>[Container: PostgreSQL]</div><div style='font-size: 80%; margin-top:10px'>Libros, ejemplares, reservas,<br />préstamos y multas.</div>")]
+    style 12 fill:#438dd5,stroke:#2e6295,color:#ffffff
+    13["<div style='font-weight: bold'>Sistema académico UNSA</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Proporciona el estado de<br />matrícula mediante API.</div>"]
+    style 13 fill:#999999,stroke:#6b6b6b,color:#ffffff
+
+    1-. "<div>1. Selecciona el ejemplar y<br />solicita reservar</div><div style='font-size: 70%'>[HTTPS]</div>" .->4
+    4-. "<div>2. Envía la solicitud al<br />endpoint de reservas</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->8
+    8-. "<div>3. Solicita validar matrícula<br />vigente</div><div style='font-size: 70%'></div>" .->11
+    11-. "<div>4. Consulta matrícula<br />mediante API</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->13
+    8-. "<div>5. Solicita comprobar<br />disponibilidad</div><div style='font-size: 70%'></div>" .->7
+    7-. "<div>6. Consulta el estado actual<br />del ejemplar</div><div style='font-size: 70%'>[SQL/TCP]</div>" .->12
+    8-. "<div>7. Confirma reserva y<br />actualiza ejemplar en una<br />transacción; rechaza<br />conflicto</div><div style='font-size: 70%'>[SQL/TCP]</div>" .->12
+
+  end

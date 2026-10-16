@@ -1,0 +1,52 @@
+@startuml
+title <size:24>Diagrama de Componentes - BiblioUnsa</size>\n<size:24>Modelo C4 - Componentes</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Component>
+
+System(SistemaacadémicoUNSA, "Sistema académico UNSA", $descr="Proporciona el estado de matrícula mediante API.", $tags="", $link="")
+System(Autenticacióninstitucional, "Autenticación institucional", $descr="Valida credenciales institucionales.", $tags="", $link="")
+
+System_Boundary("BiblioUNSA_boundary", "BiblioUNSA", $tags="") {
+  Container_Boundary("BiblioUNSA.BackendAPI_boundary", "Backend API", $tags="") {
+    Component(BiblioUNSA.BackendAPI.Multas, "Multas", $techn="Módulo backend", $descr="Calcula y gestiona sanciones por retraso.", $tags="", $link="")
+    Component(BiblioUNSA.BackendAPI.Integraciónacadémica, "Integración académica", $techn="Módulo backend", $descr="Adaptador para consumir API académica e identidad.", $tags="", $link="")
+    Component(BiblioUNSA.BackendAPI.Usuariosyautenticación, "Usuarios y autenticación", $techn="Módulo backend", $descr="Identidad, perfiles y acceso institucional.", $tags="", $link="")
+    Component(BiblioUNSA.BackendAPI.Catálogo, "Catálogo", $techn="Módulo backend", $descr="Consulta libros y ejemplares.", $tags="", $link="")
+    Component(BiblioUNSA.BackendAPI.Reservas, "Reservas", $techn="Módulo backend", $descr="Registra reservas y controla conflictos de disponibilidad.", $tags="", $link="")
+    Component(BiblioUNSA.BackendAPI.Préstamos, "Préstamos", $techn="Módulo backend", $descr="Registra entregas y devoluciones.", $tags="", $link="")
+  }
+
+  ContainerDb(BiblioUNSA.BasededatosBiblioUNSA, "Base de datos BiblioUNSA", $techn="PostgreSQL", $descr="Libros, ejemplares, reservas, préstamos y multas.", $tags="", $link="")
+  Container(BiblioUNSA.AplicaciónWeb, "Aplicación Web", $techn="Angular", $descr="Presentación para estudiantes y bibliotecarios.", $tags="", $link="")
+}
+
+Rel(BiblioUNSA.BackendAPI.Usuariosyautenticación, Autenticacióninstitucional, "Verifica identidad", $techn="HTTPS (por verificar)", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Integraciónacadémica, SistemaacadémicoUNSA, "Valida matrícula", $techn="HTTPS/JSON", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Reservas, BiblioUNSA.BackendAPI.Catálogo, "Consulta ejemplares disponibles", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Reservas, BiblioUNSA.BackendAPI.Integraciónacadémica, "Valida matrícula del estudiante", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Préstamos, BiblioUNSA.BackendAPI.Reservas, "Consume reserva confirmada", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Préstamos, BiblioUNSA.BackendAPI.Catálogo, "Actualiza disponibilidad", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Multas, BiblioUNSA.BackendAPI.Préstamos, "Consulta préstamos vencidos", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Reservas, BiblioUNSA.BackendAPI.Usuariosyautenticación, "Identifica estudiante", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Préstamos, BiblioUNSA.BackendAPI.Usuariosyautenticación, "Valida bibliotecario", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Usuariosyautenticación, BiblioUNSA.BackendAPI.Integraciónacadémica, "Solicita autenticación institucional", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.AplicaciónWeb, BiblioUNSA.BackendAPI.Reservas, "Solicita reservar un ejemplar mediante la API", $techn="HTTPS/JSON", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Catálogo, BiblioUNSA.BasededatosBiblioUNSA, "Consulta disponibilidad de ejemplares", $techn="SQL/TCP", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Reservas, BiblioUNSA.BasededatosBiblioUNSA, "Registra una reserva activa mediante transacción", $techn="SQL/TCP", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

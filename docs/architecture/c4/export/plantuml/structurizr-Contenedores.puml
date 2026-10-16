@@ -1,0 +1,38 @@
+@startuml
+title <size:24>Diagrama de Contenedores - BiblioUnsa</size>\n<size:24>Modelo C4 - Contenedores</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+Person(Estudiante, "Estudiante", $descr="Consulta, reserva y recibe préstamos de libros.", $tags="", $link="")
+Person(Bibliotecario, "Bibliotecario", $descr="Registra préstamos, devoluciones y multas.", $tags="", $link="")
+System(SistemaacadémicoUNSA, "Sistema académico UNSA", $descr="Proporciona el estado de matrícula mediante API.", $tags="", $link="")
+System(Autenticacióninstitucional, "Autenticación institucional", $descr="Valida credenciales institucionales.", $tags="", $link="")
+
+System_Boundary("BiblioUNSA_boundary", "BiblioUNSA", $tags="") {
+  ContainerDb(BiblioUNSA.BasededatosBiblioUNSA, "Base de datos BiblioUNSA", $techn="PostgreSQL", $descr="Libros, ejemplares, reservas, préstamos y multas.", $tags="", $link="")
+  Container(BiblioUNSA.AplicaciónWeb, "Aplicación Web", $techn="Angular", $descr="Presentación para estudiantes y bibliotecarios.", $tags="", $link="")
+  Container(BiblioUNSA.BackendAPI, "Backend API", $techn="Django", $descr="Backend de monolito modular.", $tags="", $link="")
+}
+
+Rel(Estudiante, BiblioUNSA.AplicaciónWeb, "Usa el portal", $techn="HTTPS", $tags="", $link="")
+Rel(Bibliotecario, BiblioUNSA.AplicaciónWeb, "Usa el portal", $techn="HTTPS", $tags="", $link="")
+Rel(BiblioUNSA.AplicaciónWeb, BiblioUNSA.BackendAPI, "Solicita operaciones de biblioteca", $techn="HTTPS/JSON", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI, BiblioUNSA.BasededatosBiblioUNSA, "Lee y escribe datos", $techn="SQL/TCP", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI, Autenticacióninstitucional, "Verifica identidad", $techn="HTTPS (por verificar)", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI, SistemaacadémicoUNSA, "Valida matrícula", $techn="HTTPS/JSON", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

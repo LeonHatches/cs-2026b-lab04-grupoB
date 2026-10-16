@@ -1,0 +1,52 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["Diagrama de Componentes - BiblioUnsa"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    13["<div style='font-weight: bold'>Sistema académico UNSA</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Proporciona el estado de<br />matrícula mediante API.</div>"]
+    style 13 fill:#999999,stroke:#6b6b6b,color:#ffffff
+    14["<div style='font-weight: bold'>Autenticación institucional</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Valida credenciales<br />institucionales.</div>"]
+    style 14 fill:#999999,stroke:#6b6b6b,color:#ffffff
+
+    subgraph 3 ["BiblioUNSA"]
+      style 3 fill:#ffffff,stroke:#0b4884,color:#0b4884
+
+      subgraph 5 ["Backend API"]
+        style 5 fill:#ffffff,stroke:#2e6295,color:#2e6295
+
+        10["<div style='font-weight: bold'>Multas</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Calcula y gestiona sanciones<br />por retraso.</div>"]
+        style 10 fill:#85bbf0,stroke:#5d82a8,color:#000000
+        11["<div style='font-weight: bold'>Integración académica</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Adaptador para consumir API<br />académica e identidad.</div>"]
+        style 11 fill:#85bbf0,stroke:#5d82a8,color:#000000
+        6["<div style='font-weight: bold'>Usuarios y autenticación</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Identidad, perfiles y acceso<br />institucional.</div>"]
+        style 6 fill:#85bbf0,stroke:#5d82a8,color:#000000
+        7["<div style='font-weight: bold'>Catálogo</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Consulta libros y ejemplares.</div>"]
+        style 7 fill:#85bbf0,stroke:#5d82a8,color:#000000
+        8["<div style='font-weight: bold'>Reservas</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Registra reservas y controla<br />conflictos de disponibilidad.</div>"]
+        style 8 fill:#85bbf0,stroke:#5d82a8,color:#000000
+        9["<div style='font-weight: bold'>Préstamos</div><div style='font-size: 70%; margin-top: 0px'>[Component: Módulo backend]</div><div style='font-size: 80%; margin-top:10px'>Registra entregas y<br />devoluciones.</div>"]
+        style 9 fill:#85bbf0,stroke:#5d82a8,color:#000000
+      end
+
+      12[("<div style='font-weight: bold'>Base de datos BiblioUNSA</div><div style='font-size: 70%; margin-top: 0px'>[Container: PostgreSQL]</div><div style='font-size: 80%; margin-top:10px'>Libros, ejemplares, reservas,<br />préstamos y multas.</div>")]
+      style 12 fill:#438dd5,stroke:#2e6295,color:#ffffff
+      4["<div style='font-weight: bold'>Aplicación Web</div><div style='font-size: 70%; margin-top: 0px'>[Container: Angular]</div><div style='font-size: 80%; margin-top:10px'>Presentación para estudiantes<br />y bibliotecarios.</div>"]
+      style 4 fill:#438dd5,stroke:#2e6295,color:#ffffff
+    end
+
+    6-. "<div>Verifica identidad</div><div style='font-size: 70%'>[HTTPS (por verificar)]</div>" .->14
+    11-. "<div>Valida matrícula</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->13
+    8-. "<div>Consulta ejemplares<br />disponibles</div><div style='font-size: 70%'></div>" .->7
+    8-. "<div>Valida matrícula del<br />estudiante</div><div style='font-size: 70%'></div>" .->11
+    9-. "<div>Consume reserva confirmada</div><div style='font-size: 70%'></div>" .->8
+    9-. "<div>Actualiza disponibilidad</div><div style='font-size: 70%'></div>" .->7
+    10-. "<div>Consulta préstamos vencidos</div><div style='font-size: 70%'></div>" .->9
+    8-. "<div>Identifica estudiante</div><div style='font-size: 70%'></div>" .->6
+    9-. "<div>Valida bibliotecario</div><div style='font-size: 70%'></div>" .->6
+    6-. "<div>Solicita autenticación<br />institucional</div><div style='font-size: 70%'></div>" .->11
+    4-. "<div>Solicita reservar un ejemplar<br />mediante la API</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->8
+    7-. "<div>Consulta disponibilidad de<br />ejemplares</div><div style='font-size: 70%'>[SQL/TCP]</div>" .->12
+    8-. "<div>Registra una reserva activa<br />mediante transacción</div><div style='font-size: 70%'>[SQL/TCP]</div>" .->12
+
+  end

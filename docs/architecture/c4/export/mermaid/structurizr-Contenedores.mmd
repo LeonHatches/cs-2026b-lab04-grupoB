@@ -1,0 +1,34 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["Diagrama de Contenedores - BiblioUnsa"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    1["<div style='font-weight: bold'>Estudiante</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Consulta, reserva y recibe<br />préstamos de libros.</div>"]
+    style 1 fill:#08427b,stroke:#052e56,color:#ffffff
+    2["<div style='font-weight: bold'>Bibliotecario</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Registra préstamos,<br />devoluciones y multas.</div>"]
+    style 2 fill:#08427b,stroke:#052e56,color:#ffffff
+    13["<div style='font-weight: bold'>Sistema académico UNSA</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Proporciona el estado de<br />matrícula mediante API.</div>"]
+    style 13 fill:#999999,stroke:#6b6b6b,color:#ffffff
+    14["<div style='font-weight: bold'>Autenticación institucional</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Valida credenciales<br />institucionales.</div>"]
+    style 14 fill:#999999,stroke:#6b6b6b,color:#ffffff
+
+    subgraph 3 ["BiblioUNSA"]
+      style 3 fill:#ffffff,stroke:#0b4884,color:#0b4884
+
+      12[("<div style='font-weight: bold'>Base de datos BiblioUNSA</div><div style='font-size: 70%; margin-top: 0px'>[Container: PostgreSQL]</div><div style='font-size: 80%; margin-top:10px'>Libros, ejemplares, reservas,<br />préstamos y multas.</div>")]
+      style 12 fill:#438dd5,stroke:#2e6295,color:#ffffff
+      4["<div style='font-weight: bold'>Aplicación Web</div><div style='font-size: 70%; margin-top: 0px'>[Container: Angular]</div><div style='font-size: 80%; margin-top:10px'>Presentación para estudiantes<br />y bibliotecarios.</div>"]
+      style 4 fill:#438dd5,stroke:#2e6295,color:#ffffff
+      5["<div style='font-weight: bold'>Backend API</div><div style='font-size: 70%; margin-top: 0px'>[Container: Django]</div><div style='font-size: 80%; margin-top:10px'>Backend de monolito modular.</div>"]
+      style 5 fill:#438dd5,stroke:#2e6295,color:#ffffff
+    end
+
+    1-. "<div>Usa el portal</div><div style='font-size: 70%'>[HTTPS]</div>" .->4
+    2-. "<div>Usa el portal</div><div style='font-size: 70%'>[HTTPS]</div>" .->4
+    4-. "<div>Solicita operaciones de<br />biblioteca</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->5
+    5-. "<div>Lee y escribe datos</div><div style='font-size: 70%'>[SQL/TCP]</div>" .->12
+    5-. "<div>Verifica identidad</div><div style='font-size: 70%'>[HTTPS (por verificar)]</div>" .->14
+    5-. "<div>Valida matrícula</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->13
+
+  end

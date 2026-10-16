@@ -1,0 +1,49 @@
+@startuml
+title <size:24>BiblioUNSA - Dinámica de reserva de un ejemplar</size>\n<size:24>Pasos para reservar un ejemplar, desde la solicitud del estudiante hasta la base de datos.</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Component>
+
+Person(Estudiante, "Estudiante", $descr="Consulta, reserva y recibe préstamos de libros.", $tags="", $link="")
+
+System(SistemaacadémicoUNSA, "Sistema académico UNSA", $descr="Proporciona el estado de matrícula mediante API.", $tags="", $link="")
+
+System_Boundary("BiblioUNSA_boundary", "BiblioUNSA", $tags="") {
+  Container_Boundary("BiblioUNSA.BackendAPI_boundary", "Backend API", $tags="") {
+    Component(BiblioUNSA.BackendAPI.Integraciónacadémica, "Integración académica", $techn="Módulo backend", $descr="Adaptador para consumir API académica e identidad.", $tags="", $link="")
+    Component(BiblioUNSA.BackendAPI.Catálogo, "Catálogo", $techn="Módulo backend", $descr="Consulta libros y ejemplares.", $tags="", $link="")
+    Component(BiblioUNSA.BackendAPI.Reservas, "Reservas", $techn="Módulo backend", $descr="Registra reservas y controla conflictos de disponibilidad.", $tags="", $link="")
+  }
+
+  ContainerDb(BiblioUNSA.BasededatosBiblioUNSA, "Base de datos BiblioUNSA", $techn="PostgreSQL", $descr="Libros, ejemplares, reservas, préstamos y multas.", $tags="", $link="")
+  Container(BiblioUNSA.AplicaciónWeb, "Aplicación Web", $techn="Angular", $descr="Presentación para estudiantes y bibliotecarios.", $tags="", $link="")
+}
+
+Person(Estudiante, "Estudiante", $descr="Consulta, reserva y recibe préstamos de libros.", $tags="", $link="")
+Container(BiblioUNSA.AplicaciónWeb, "Aplicación Web", $techn="Angular", $descr="Presentación para estudiantes y bibliotecarios.", $tags="", $link="")
+ContainerDb(BiblioUNSA.BasededatosBiblioUNSA, "Base de datos BiblioUNSA", $techn="PostgreSQL", $descr="Libros, ejemplares, reservas, préstamos y multas.", $tags="", $link="")
+System(SistemaacadémicoUNSA, "Sistema académico UNSA", $descr="Proporciona el estado de matrícula mediante API.", $tags="", $link="")
+
+Rel(Estudiante, BiblioUNSA.AplicaciónWeb, "1: Selecciona el ejemplar y solicita reservar", $techn="HTTPS", $tags="", $link="")
+Rel(BiblioUNSA.AplicaciónWeb, BiblioUNSA.BackendAPI.Reservas, "2: Envía la solicitud al endpoint de reservas", $techn="HTTPS/JSON", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Reservas, BiblioUNSA.BackendAPI.Integraciónacadémica, "3: Solicita validar matrícula vigente", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Integraciónacadémica, SistemaacadémicoUNSA, "4: Consulta matrícula mediante API", $techn="HTTPS/JSON", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Reservas, BiblioUNSA.BackendAPI.Catálogo, "5: Solicita comprobar disponibilidad", $techn="", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Catálogo, BiblioUNSA.BasededatosBiblioUNSA, "6: Consulta el estado actual del ejemplar", $techn="SQL/TCP", $tags="", $link="")
+Rel(BiblioUNSA.BackendAPI.Reservas, BiblioUNSA.BasededatosBiblioUNSA, "7: Confirma reserva y actualiza ejemplar en una transacción; rechaza conflicto", $techn="SQL/TCP", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml
