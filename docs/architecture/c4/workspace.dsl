@@ -38,7 +38,34 @@ workspace "BiblioUNSA" "Modelo C4" {
         bibliounsa.api.reservas -> bibliounsa.api.usuarios "Identifica estudiante"
         bibliounsa.api.prestamos -> bibliounsa.api.usuarios "Valida bibliotecario"
         bibliounsa.api.usuarios -> bibliounsa.api.integracion "Solicita autenticación institucional"
-        
+
+        // E4: el endpoint de reserva se detalla dentro del backend (secuencia del Lab 05).
+        bibliounsa.web -> bibliounsa.api.reservas "Solicita reservar un ejemplar mediante la API" "HTTPS/JSON"
+        // Los repositorios del UML se abstraen como acceso a PostgreSQL, según ADR-002.
+        bibliounsa.api.catalogo -> bibliounsa.db "Consulta disponibilidad de ejemplares" "SQL/TCP"
+        bibliounsa.api.reservas -> bibliounsa.db "Registra una reserva activa mediante transacción" "SQL/TCP"
+
+        // E5: topología del Lab 04; es un diseño, no infraestructura ya contratada.
+        produccion = deploymentEnvironment "Producción" {
+            deploymentNode "Dispositivo del usuario" "Equipo o celular del estudiante o bibliotecario; no se exige un SO específico." "Navegador web" {
+                deploymentNode "Navegador" "Ejecuta la aplicación Angular y accede a la API mediante HTTPS." "JavaScript / Angular" {
+                    containerInstance bibliounsa.web
+                }
+            }
+            deploymentNode "Servidor en la nube" "Servidor único propuesto para el MVP de bajo presupuesto, según el despliegue del Lab 04." "Servidor único del MVP" {
+                properties {
+                    "Origen" "docs/architecture/diagramas/despliegue.py"
+                    "Restricción" "R-03: presupuesto bajo; justificar servicios de pago"
+                    "Pendiente" "Confirmar proveedor, SO, CPU, RAM y costo antes de contratar"
+                }
+                deploymentNode "Entorno de aplicación" "Nginx atiende HTTPS y dirige las solicitudes al monolito Django." "Nginx / Python / Django" {
+                    containerInstance bibliounsa.api
+                }
+                deploymentNode "Servicio de base de datos" "PostgreSQL en el mismo servidor; datos propios de BiblioUNSA y transacciones de reserva." "PostgreSQL" {
+                    containerInstance bibliounsa.db
+                }
+            }
+        }
     }
 
     views {
@@ -57,9 +84,23 @@ workspace "BiblioUNSA" "Modelo C4" {
             include *
             autolayout lr
         }
-        // E4: Hatches debe agregar aquí una vista dynamic del caso Reservar libro
-        // E5: Hatches debe agregar en model el deploymentEnvironment Producción
-        // y aquí una vista deployment referida a ese entorno.
+        // El alcance del backend permite mostrar sus componentes, la Web y el sistema externo.
+        dynamic bibliounsa.api "DinamicaReserva" "Pasos para reservar un ejemplar, desde la solicitud del estudiante hasta la base de datos." {
+            title "BiblioUNSA - Dinámica de reserva de un ejemplar"
+            1: estudiante -> bibliounsa.web "Selecciona el ejemplar y solicita reservar"
+            2: bibliounsa.web -> bibliounsa.api.reservas "Envía la solicitud al endpoint de reservas"
+            3: bibliounsa.api.reservas -> bibliounsa.api.integracion "Solicita validar matrícula vigente"
+            4: bibliounsa.api.integracion -> academico "Consulta matrícula mediante API"
+            5: bibliounsa.api.reservas -> bibliounsa.api.catalogo "Solicita comprobar disponibilidad"
+            6: bibliounsa.api.catalogo -> bibliounsa.db "Consulta el estado actual del ejemplar"
+            7: bibliounsa.api.reservas -> bibliounsa.db "Confirma reserva y actualiza ejemplar en una transacción; rechaza conflicto"
+            autolayout lr
+        }
+        deployment bibliounsa produccion "DespliegueProduccion" "Dónde se ejecuta cada contenedor de BiblioUNSA en producción." {
+            title "BiblioUNSA - Despliegue en Producción"
+            include *
+            autolayout lr
+        }
         styles {
             element "Person" {
                 shape person 
