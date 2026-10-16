@@ -1,0 +1,42 @@
+@startuml
+title <size:24>BiblioUNSA - Despliegue en Producción</size>\n<size:24>Dónde se ejecuta cada contenedor de BiblioUNSA en producción.</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Deployment>
+
+Deployment_Node(Producción.Dispositivodelusuario, "Dispositivo del usuario", $type="Navegador web", $descr="Equipo o celular del estudiante o bibliotecario; no se exige un SO específico.", $tags="", $link="") {
+  Deployment_Node(Producción.Dispositivodelusuario.Navegador, "Navegador", $type="JavaScript / Angular", $descr="Ejecuta la aplicación Angular y accede a la API mediante HTTPS.", $tags="", $link="") {
+    Container(Producción.Dispositivodelusuario.Navegador.AplicaciónWeb_1, "Aplicación Web", $techn="Angular", $descr="Presentación para estudiantes y bibliotecarios.", $tags="", $link="")
+  }
+
+}
+
+Deployment_Node(Producción.Servidorenlanube, "Servidor en la nube", $type="Servidor único del MVP", $descr="Servidor único propuesto para el MVP de bajo presupuesto, según el despliegue del Lab 04.", $tags="", $link="") {
+  Deployment_Node(Producción.Servidorenlanube.Entornodeaplicación, "Entorno de aplicación", $type="Nginx / Python / Django", $descr="Nginx atiende HTTPS y dirige las solicitudes al monolito Django.", $tags="", $link="") {
+    Container(Producción.Servidorenlanube.Entornodeaplicación.BackendAPI_1, "Backend API", $techn="Django", $descr="Backend de monolito modular.", $tags="", $link="")
+  }
+
+  Deployment_Node(Producción.Servidorenlanube.Serviciodebasededatos, "Servicio de base de datos", $type="PostgreSQL", $descr="PostgreSQL en el mismo servidor; datos propios de BiblioUNSA y transacciones de reserva.", $tags="", $link="") {
+    ContainerDb(Producción.Servidorenlanube.Serviciodebasededatos.BasededatosBiblioUNSA_1, "Base de datos BiblioUNSA", $techn="PostgreSQL", $descr="Libros, ejemplares, reservas, préstamos y multas.", $tags="", $link="")
+  }
+
+}
+
+Rel(Producción.Dispositivodelusuario.Navegador.AplicaciónWeb_1, Producción.Servidorenlanube.Entornodeaplicación.BackendAPI_1, "Solicita operaciones de biblioteca", $techn="HTTPS/JSON", $tags="", $link="")
+Rel(Producción.Servidorenlanube.Entornodeaplicación.BackendAPI_1, Producción.Servidorenlanube.Serviciodebasededatos.BasededatosBiblioUNSA_1, "Lee y escribe datos", $techn="SQL/TCP", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

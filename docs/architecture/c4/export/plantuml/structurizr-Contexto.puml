@@ -1,0 +1,30 @@
+@startuml
+title <size:24>Diagrama de Contexto - BiblioUnsa</size>\n<size:24>Modelo C4 - Contexto</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+
+Person(Estudiante, "Estudiante", $descr="Consulta, reserva y recibe préstamos de libros.", $tags="", $link="")
+System(SistemaacadémicoUNSA, "Sistema académico UNSA", $descr="Proporciona el estado de matrícula mediante API.", $tags="", $link="")
+System(Autenticacióninstitucional, "Autenticación institucional", $descr="Valida credenciales institucionales.", $tags="", $link="")
+Person(Bibliotecario, "Bibliotecario", $descr="Registra préstamos, devoluciones y multas.", $tags="", $link="")
+System(BiblioUNSA, "BiblioUNSA", $descr="Sistema de catálogo, reservas y préstamos de bibliotecas UNSA.", $tags="", $link="")
+
+Rel(Estudiante, BiblioUNSA, "Consulta catálogo y solicita reservas", $techn="", $tags="", $link="")
+Rel(Bibliotecario, BiblioUNSA, "Registra préstamos y devoluciones", $techn="", $tags="", $link="")
+Rel(BiblioUNSA, SistemaacadémicoUNSA, "Consulta matrícula vigente", $techn="HTTPS/JSON", $tags="", $link="")
+Rel(BiblioUNSA, Autenticacióninstitucional, "Autentica usuarios", $techn="HTTPS", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

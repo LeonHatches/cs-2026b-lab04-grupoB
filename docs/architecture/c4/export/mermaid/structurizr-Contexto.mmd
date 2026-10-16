@@ -1,0 +1,23 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["Diagrama de Contexto - BiblioUnsa"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    1["<div style='font-weight: bold'>Estudiante</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Consulta, reserva y recibe<br />préstamos de libros.</div>"]
+    style 1 fill:#08427b,stroke:#052e56,color:#ffffff
+    13["<div style='font-weight: bold'>Sistema académico UNSA</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Proporciona el estado de<br />matrícula mediante API.</div>"]
+    style 13 fill:#999999,stroke:#6b6b6b,color:#ffffff
+    14["<div style='font-weight: bold'>Autenticación institucional</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Valida credenciales<br />institucionales.</div>"]
+    style 14 fill:#999999,stroke:#6b6b6b,color:#ffffff
+    2["<div style='font-weight: bold'>Bibliotecario</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Registra préstamos,<br />devoluciones y multas.</div>"]
+    style 2 fill:#08427b,stroke:#052e56,color:#ffffff
+    3["<div style='font-weight: bold'>BiblioUNSA</div><div style='font-size: 70%; margin-top: 0px'>[Software System]</div><div style='font-size: 80%; margin-top:10px'>Sistema de catálogo, reservas<br />y préstamos de bibliotecas<br />UNSA.</div>"]
+    style 3 fill:#1168bd,stroke:#0b4884,color:#ffffff
+
+    1-. "<div>Consulta catálogo y solicita<br />reservas</div><div style='font-size: 70%'></div>" .->3
+    2-. "<div>Registra préstamos y<br />devoluciones</div><div style='font-size: 70%'></div>" .->3
+    3-. "<div>Consulta matrícula vigente</div><div style='font-size: 70%'>[HTTPS/JSON]</div>" .->13
+    3-. "<div>Autentica usuarios</div><div style='font-size: 70%'>[HTTPS]</div>" .->14
+
+  end
