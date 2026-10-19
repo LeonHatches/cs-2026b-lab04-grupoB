@@ -4,7 +4,7 @@ import pytest
 from bibliounsa_lab07.externos import AcademicoLegado, AcademicoNuevo, CatalogoMemoria
 
 
-@pytest.fixture(params=["bibliounsa_lab07.antes.servicio"])
+@pytest.fixture(params=["bibliounsa_lab07.antes.servicio", "bibliounsa_lab07.servicio"])
 def modulo(request):
     return importlib.import_module(request.param)
 
