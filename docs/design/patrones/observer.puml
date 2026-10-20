@@ -1,0 +1,30 @@
+
+@startuml
+skinparam classAttributeIconSize 0
+title BiblioUNSA - Patron Observer
+
+class ServicioBiblioteca {
+  + reservar(estudiante_id, ejemplar_id)
+}
+class PublicadorEventos {
+  - _suscriptores: dict
+  + suscribir(tipo, suscriptor)
+  + publicar(tipo, datos)
+}
+interface Suscriptor {
+  + actualizar(datos)
+}
+class ConfirmadorReserva {
+  - bandeja: list
+  + actualizar(datos)
+}
+class AuditorReserva {
+  - bandeja: list
+  + actualizar(datos)
+}
+
+ServicioBiblioteca --> PublicadorEventos : publica reserva_creada
+PublicadorEventos --> Suscriptor : notifica
+Suscriptor <|.. ConfirmadorReserva
+Suscriptor <|.. AuditorReserva
+@enduml

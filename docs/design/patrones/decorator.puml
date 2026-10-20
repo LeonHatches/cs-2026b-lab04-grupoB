@@ -1,0 +1,42 @@
+
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+title BiblioUNSA - Patron Decorator (Lab 07)
+
+interface ServicioMatricula {
+  + validar_vigente(estudiante_id): bool
+}
+
+class MatriculaLegadoAdapter {
+  - sdk
+  + validar_vigente(estudiante_id): bool
+}
+
+class MatriculaNuevoAdapter {
+  - sdk
+  + validar_vigente(estudiante_id): bool
+}
+
+class MatriculaConReintentos <<Decorator>> {
+  - interno: ServicioMatricula
+  - intentos: int
+  + validar_vigente(estudiante_id): bool
+}
+
+ServicioMatricula <|.. MatriculaLegadoAdapter
+ServicioMatricula <|.. MatriculaNuevoAdapter
+ServicioMatricula <|.. MatriculaConReintentos
+
+MatriculaConReintentos --> ServicioMatricula : envuelve
+
+note right of MatriculaConReintentos
+  Reintenta únicamente cuando
+  ocurre TimeoutError.
+
+  Si la matrícula no está vigente,
+  devuelve False sin reintentar.
+end note
+
+@enduml

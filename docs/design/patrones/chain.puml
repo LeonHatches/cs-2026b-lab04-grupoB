@@ -1,0 +1,74 @@
+
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+title BiblioUNSA - Chain of Responsibility (Lab 07)
+
+class RecomendadorLibros {
+  - proveedor: ProveedorLLM
+  - guardrails: Guardrail
+  + recomendar(titulo)
+}
+
+abstract class Guardrail <<Handler>> {
+  - siguiente: Guardrail
+  + validar(texto): str
+  # _aplicar(texto)
+}
+
+class SinPreciosInventados <<ConcreteHandler>> {
+  # _aplicar(texto)
+}
+
+class SinDisponibilidadGarantizada <<ConcreteHandler>> {
+  # _aplicar(texto)
+}
+
+interface ProveedorLLM {
+  + completar(prompt): str
+}
+
+class LLMAdapter {
+  - cliente: ClienteLLMSimulado
+  + completar(prompt): str
+}
+
+class ClienteLLMSimulado {
+  + generar(texto_entrada)
+}
+
+RecomendadorLibros --> ProveedorLLM : consulta
+RecomendadorLibros --> Guardrail : valida respuesta
+
+ProveedorLLM <|.. LLMAdapter
+LLMAdapter --> ClienteLLMSimulado : adapta
+
+Guardrail <|-- SinPreciosInventados
+Guardrail <|-- SinDisponibilidadGarantizada
+
+Guardrail --> Guardrail : siguiente
+
+SinPreciosInventados --> SinDisponibilidadGarantizada : siguiente
+
+note right of Guardrail
+  Cada guardrail valida la respuesta
+  y la pasa al siguiente manejador.
+
+  Si detecta una afirmacion no permitida,
+  lanza ValueError.
+end note
+
+note bottom of SinPreciosInventados
+  Bloquea precios inventados:
+  "S/ 25" o "precio: 30"
+end note
+
+note bottom of SinDisponibilidadGarantizada
+  Bloquea afirmaciones como:
+  "disponibilidad garantizada"
+  "stock garantizado"
+  "100% disponible"
+end note
+
+@enduml
