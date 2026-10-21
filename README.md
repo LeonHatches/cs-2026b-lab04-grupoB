@@ -138,3 +138,27 @@ C4Context
 - [Bitácora de IA](docs/architecture/c4/bitacora-ia.md)
 
 Las vistas se validaron y exportaron mediante GitHub Actions a PlantUML y Mermaid, conservando una fuente única de arquitectura.
+
+---
+
+## Patrones de diseño (Lab 07)
+
+### Tabla de olores
+
+| Olor | Patrón | Prueba verificable |
+|---|---|---|
+| SDK académico con interfaces distintas | Strategy, Adapter, Factory | `test_adapter_nuevo_traduce_respuesta_de_sdk`, `test_factory_extiende_proveedor_sin_cambiar_servicio` |
+| Cálculo de multas con condicionales | Strategy | `test_strategy_multa_nueva_sin_condicionales` |
+| Reintentos duplicados | Decorator | `test_decorator_solo_reintenta_timeout` |
+| Condicionales sobre préstamo | State | `test_state_rechaza_devolucion_sin_prestamo` |
+| Notificación acoplada | Observer | `test_observer_permita_agregar_suscriptor_sin_modificar_servicio` |
+| IA no confiable | Adapter, Decorator, Chain of Responsibility | `test_ia_cache_no_repite_llamada`, `test_ia_guardrails_bloquean_alucinaciones` |
+
+### Metricas
+
+| Medida | Resultado |
+|---|---|
+| Complejidad de clase `ServicioBiblioteca` | 6 (B) |
+| Complejidad promedio | 1.71 (A) |
+| Lineas de código (SLOC) | 276 |
+|  Indice de mantenibilidad de `servicios.py` | 65.92 (B) |

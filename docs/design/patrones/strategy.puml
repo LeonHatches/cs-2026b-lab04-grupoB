@@ -1,0 +1,37 @@
+@startuml
+title BiblioUNSA - Strategy (Lab 07)
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+left to right direction
+
+abstract class PoliticaMulta <<Strategy>> {
+    + calcular(dias_retraso): float
+}
+
+class MultaEstudiante <<ConcreteStrategy>> {
+    + calcular(dias_retraso): float
+}
+
+class MultaDocente <<ConcreteStrategy>> {
+    + calcular(dias_retraso): float
+}
+
+class ServicioBiblioteca <<Context>> {
+    + calcular_multa(tipo_usuario, dias_retraso)
+}
+
+PoliticaMulta <|-- MultaEstudiante
+PoliticaMulta <|-- MultaDocente
+
+ServicioBiblioteca ..> PoliticaMulta : utiliza estrategia
+
+note bottom of MultaEstudiante
+  Multa = dias_retraso * 2.0
+end note
+
+note bottom of MultaDocente
+  Multa = dias_retraso * 1.0
+end note
+
+@enduml

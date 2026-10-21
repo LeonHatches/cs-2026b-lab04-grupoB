@@ -1,0 +1,35 @@
+@startuml
+title BiblioUNSA - Adapter (Lab 07)
+
+skinparam classAttributeIconSize 0
+left to right direction
+
+abstract class ServicioMatricula <<Target>> {
+    {abstract} +validar_vigente(estudiante_id)
+}
+
+class MatriculaLegadoAdapter <<Adapter>> {
+    -sdk
+    +validar_vigente(estudiante_id)
+}
+
+class MatriculaNuevoAdapter <<Adapter>> {
+    -sdk
+    +validar_vigente(estudiante_id)
+}
+
+class SDKLegado <<Adaptee>> {
+    +validar_matricula(estudiante_id)
+}
+
+class SDKNuevo <<Adaptee>> {
+    +obtener_estado(codigo)
+}
+
+ServicioMatricula <|-- MatriculaLegadoAdapter
+ServicioMatricula <|-- MatriculaNuevoAdapter
+
+MatriculaLegadoAdapter --> SDKLegado : delega
+MatriculaNuevoAdapter --> SDKNuevo : delega
+
+@enduml
