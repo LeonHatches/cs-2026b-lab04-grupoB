@@ -1,0 +1,61 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+title BiblioUNSA - Patron State del prestamo (Lab 07)
+
+class Prestamo <<Context>> {
+  - _estado: EstadoPrestamoBase
+  + estado: str
+  + cambiar_a(estado)
+  + registrar_prestamo()
+  + marcar_vencido()
+  + calcular_multa(dias_retraso)
+  + registrar_devolucion()
+  + cancelar()
+  + expirar()
+}
+
+abstract class EstadoPrestamoBase <<State>> {
+  + nombre: str
+  + registrar_prestamo(prestamo)
+  + marcar_vencido(prestamo)
+  + calcular_multa(prestamo, dias_retraso)
+  + registrar_devolucion(prestamo)
+  + cancelar(prestamo)
+  + expirar(prestamo)
+}
+
+class Reservado <<ConcreteState>>
+class Prestado <<ConcreteState>>
+class Vencido <<ConcreteState>>
+class ConMulta <<ConcreteState>>
+class Devuelto <<ConcreteState>>
+class Cancelado <<ConcreteState>>
+class Expirado <<ConcreteState>>
+
+Prestamo --> EstadoPrestamoBase : delega
+
+EstadoPrestamoBase <|-- Reservado
+EstadoPrestamoBase <|-- Prestado
+EstadoPrestamoBase <|-- Vencido
+EstadoPrestamoBase <|-- ConMulta
+EstadoPrestamoBase <|-- Devuelto
+EstadoPrestamoBase <|-- Cancelado
+EstadoPrestamoBase <|-- Expirado
+
+Reservado --> Prestado : registrar_prestamo()
+Reservado --> Cancelado : cancelar()
+Reservado --> Expirado : expirar()
+Prestado --> Vencido : marcar_vencido()
+Prestado --> Devuelto : registrar_devolucion()
+Vencido --> ConMulta : calcular_multa()
+ConMulta --> Devuelto : registrar_devolucion()
+
+note right of EstadoPrestamoBase
+  Las transiciones no permitidas
+  generan ValueError.
+  Modelo basado en el Lab 05.
+end note
+
+@enduml
