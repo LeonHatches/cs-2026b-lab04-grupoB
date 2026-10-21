@@ -1,0 +1,47 @@
+@startuml
+title Patrón Factory - Creación de adaptadores
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+left to right direction
+
+class FabricaMatricula <<Factory>> {
+    - _creadores: dict
+    + __init__()
+    + registrar(nombre, creador)
+    + crear(nombre, sdk): ServicioMatricula
+}
+
+abstract class ServicioMatricula <<Product>> {
+    + validar_vigente(estudiante_id): bool
+}
+
+class MatriculaLegadoAdapter <<ConcreteProduct>> {
+    - sdk
+    + __init__(sdk)
+    + validar_vigente(estudiante_id): bool
+}
+
+class MatriculaNuevoAdapter <<ConcreteProduct>> {
+    - sdk
+    + __init__(sdk)
+    + validar_vigente(estudiante_id): bool
+}
+
+class ServicioBiblioteca <<Client>> {
+    - fabrica_matricula
+    - proveedor
+    - academico
+    + reservar(estudiante_id, ejemplar_id)
+}
+
+ServicioMatricula <|-- MatriculaLegadoAdapter
+ServicioMatricula <|-- MatriculaNuevoAdapter
+
+FabricaMatricula ..> ServicioMatricula : retorna
+FabricaMatricula ..> MatriculaLegadoAdapter : crea LEGADO
+FabricaMatricula ..> MatriculaNuevoAdapter : crea NUEVO
+
+ServicioBiblioteca --> FabricaMatricula : utiliza
+
+@enduml
