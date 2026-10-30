@@ -1,0 +1,33 @@
+digraph Utilidad {
+  graph [label="BiblioUNSA - Árbol de utilidad (Lab08)\nTodas las facultades y biblioteca virtual",
+         labelloc=t, rankdir=LR, bgcolor="white", fontname="Arial", fontsize=20,
+         pad=0.3, nodesep=0.3, ranksep=0.5, dpi=150];
+  node [shape=box, style="rounded,filled", fillcolor="#eef5fb", color="#32648b",
+        fontname="Arial", fontsize=12, margin="0.16,0.12"];
+  edge [color="#6b8294", arrowsize=0.6];
+  U [label="Utilidad\nBiblioUNSA", fillcolor="#194a70", fontcolor="white"];
+  R [label="Rendimiento"];
+  D [label="Disponibilidad"];
+  S [label="Seguridad"];
+  M [label="Modificabilidad"];
+  U -> {R D S M};
+  R1 [label="Latencia del catálogo"];
+  R2 [label="Latencia de reserva"];
+  D1 [label="Conservación de solicitudes"];
+  D2 [label="Recuperación del trámite"];
+  S1 [label="Autorización en backend"];
+  S2 [label="Interoperabilidad por API"];
+  M1 [label="Extensión institucional"];
+  R -> {R1 R2}; D -> {D1 D2}; S -> {S1 S2}; M -> M1;
+  QA01 [label="QA-01 (H,M)\nCatálogo: p95 <= 500 ms\n12 solicitudes/s"];
+  QA02 [label="QA-02 (M,M)\nReserva: p95 <= 1000 ms\n6 solicitudes/s; API disponible"];
+  QA03 [label="QA-03 (H,H)\n0 solicitudes perdidas\nCaída de 20 min; 20 afectadas", fillcolor="#fff0cc", color="#a87419", penwidth=2];
+  QA04 [label="QA-04 (H,M)\nResolver 20 pendientes en <= 5 min\nDespués del retorno de la API"];
+  QA05 [label="QA-05 (H,M)\n0 accesos no autorizados\n100 intentos de prueba"];
+  QA06 [label="QA-06 (M,M)\nAñadir facultad en <= 8 h\nIncluye regresión sin fallos"];
+  QA07 [label="QA-07 (H,M)\n100% consultas mediante API\n0 accesos a BD académica"];
+  R1 -> QA01; R2 -> QA02; D1 -> QA03; D2 -> QA04;
+  S1 -> QA05; S2 -> QA07; M1 -> QA06;
+  leyenda [shape=note, fillcolor="#f7f7f7", color="#888888", fontsize=11,
+    label="Leyenda: (importancia, dificultad). H: alta; M: media; L: baja.\nIDs locales Lab08; no renumeran los drivers del Lab04.\nUmbrales propuestos para laboratorio, no SLA de producción."];
+}
