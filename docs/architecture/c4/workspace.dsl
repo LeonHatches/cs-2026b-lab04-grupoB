@@ -6,16 +6,16 @@ workspace "BiblioUNSA" "Modelo C4" {
         bibliotecario = person "Bibliotecario" "Registra préstamos, devoluciones y multas."
 
         bibliounsa = softwareSystem "BiblioUNSA" "Sistema de catálogo, reservas y préstamos de bibliotecas UNSA." {
-            web = container "Aplicación Web" "Presentación para estudiantes y bibliotecarios." "Angular" "Web Browser"
-            api = container "Backend API" "Backend de monolito modular." "Django" {
-                usuarios = component "Usuarios y autenticación" "Identidad, perfiles y acceso institucional." "Módulo backend"
-                catalogo = component "Catálogo" "Consulta libros y ejemplares." "Módulo backend"
-                reservas = component "Reservas" "Registra reservas y controla conflictos de disponibilidad." "Módulo backend"
-                prestamos = component "Préstamos" "Registra entregas y devoluciones." "Módulo backend"
-                multas = component "Multas" "Calcula y gestiona sanciones por retraso." "Módulo backend"
-                integracion = component "Integración académica" "Adaptador para consumir API académica e identidad." "Módulo backend"
+            web = container "Aplicación Web" "Presentación para estudiantes y bibliotecarios. Las operaciones protegidas se autorizan en el backend [QA-05]." "Angular" "Web Browser"
+            api = container "Backend API" "Backend de monolito modular. Atiende rendimiento [QA-01], disponibilidad [QA-03, QA-04] y seguridad [QA-05]." "Django" {
+                usuarios = component "Usuarios y autenticación" "Gestiona identidad, perfiles y permisos [QA-05], permitiendo incorporar nuevas facultades [QA-06]." "Módulo backend"
+                catalogo = component "Catálogo" "Consulta libros y ejemplares mediante índices en PostgreSQL [QA-01]." "Módulo backend"
+                reservas = component "Reservas" "Registra reservas, controla conflictos de disponibilidad [QA-02] y conserva solicitudes pendientes de validación [QA-03]." "Módulo backend"                
+                prestamos = component "Préstamos" "Registra entregas y devoluciones con autorización para operaciones protegidas [QA-05]." "Módulo backend"
+                multas = component "Multas" "Calcula y gestiona sanciones por retraso con control de permisos [QA-05]." "Módulo backend"
+                integracion = component "Integración académica" "Consume la API académica [QA-07], permite integrar nuevas facultades [QA-06] y recupera validaciones pendientes [QA-03, QA-04]." "Módulo backend"
             }
-            db = container "Base de datos BiblioUNSA" "Libros, ejemplares, reservas, préstamos y multas." "PostgreSQL" "Database"
+            db = container "Base de datos BiblioUNSA" "Libros, ejemplares, reservas, préstamos y multas. Índices del catálogo [QA-01] y almacenamiento de solicitudes pendientes [QA-03]." "PostgreSQL" "Database"
         }
         academico = softwareSystem "Sistema académico UNSA" "Proporciona el estado de matrícula mediante API." "Externo"
         identidad = softwareSystem "Autenticación institucional" "Valida credenciales institucionales." "Externo"
@@ -132,4 +132,3 @@ workspace "BiblioUNSA" "Modelo C4" {
         }
     }
 }
-
