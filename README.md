@@ -179,7 +179,7 @@ Las vistas se validaron y exportaron mediante GitHub Actions a PlantUML y Mermai
 | QA-01 — Rendimiento | Índices en PostgreSQL y caché con TTL como complemento | Simulación de 1200 muestras: p95 de 830.61 ms sin optimizar, 340.79 ms con índices y 155.42 ms con índice y caché. Objetivo: p95 ≤ 500 ms. | Sí, en simulación |
 | QA-05 — Seguridad | Autorización de operaciones en backend | Simulación de 100 intentos no autorizados: los accesos indebidos disminuyeron de 100 a 0. Se aprobaron cuatro pruebas de seguridad. | Sí, en simulación |
 
-### Enlace a ADR
+### Enlaces a ADRs
 
 - [ADR-006: Rendimiento de catalogo](./docs/architecture/adr/006-rendimiento-de-catalogo.md)
 - [ADR-007: Disponibilidad de integración](./docs/architecture/adr/007-disponibilidad-integración.md)
@@ -190,4 +190,4 @@ Las vistas se validaron y exportaron mediante GitHub Actions a PlantUML y Mermai
 
 Se utiliza GitHub Actions para ejecutar automáticamente las fitness functions y verificar el cumplimiento de los criterios de calidad establecidos.
 
-![lab08-fitness](https://github.com/JoaquinQFox/cs-2026b-lab04-grupoB/actions/workflows/fitness.yml/badge.svg)
+[![lab08-fitness](https://github.com/LeonHatches/cs-2026b-lab04-grupoB/actions/workflows/fitness.yml/badge.svg)](https://github.com/LeonHatches/cs-2026b-lab04-grupoB/actions/workflows/fitness.yml)
