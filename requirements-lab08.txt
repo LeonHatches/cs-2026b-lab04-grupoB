@@ -1,3 +1,0 @@
-pytest>=8
-matplotlib>=3.7
-import-linter>=2.0

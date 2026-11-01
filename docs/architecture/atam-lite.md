@@ -28,3 +28,18 @@ Pendiente: registrar URL del issue recibido, hallazgos y respuestas con evidenci
 ## Evaluación de otro grupo
 
 Pendiente: registrar el repositorio asignado por el docente y el issue publicado.
+
+## Matriz de probabilidad e impacto
+
+Se utiliza una escala de 1 a 5 para probabilidad e impacto.
+
+| Riesgo | Probabilidad (P) | Impacto (I) | P × I |
+|---|---|---|---|
+| R1: Falla de base de datos | 2 | 5 | 10 |
+| R2: Operaciones duplicadas | 3 | 4 | 12 |
+
+## Mitigación de riesgos críticos
+
+- **R1:** Implementar respaldos y pruebas de persistencia para reducir el riesgo de pérdida de solicitudes ante fallas de PostgreSQL.
+
+- **R2:** Utilizar claves idempotentes y realizar pruebas de reintent para evitar operaciones duplicadas.
