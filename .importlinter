@@ -1,0 +1,20 @@
+[importlinter]
+root_package = bibliounsa_lab07
+
+[importlinter:contract:modulos]
+name = FF-01 Dominio independiente del servicio principal
+type = forbidden
+source_modules =
+    bibliounsa_lab07.politicas
+    bibliounsa_lab07.estados
+    bibliounsa_lab07.eventos
+forbidden_modules =
+    bibliounsa_lab07.servicio
+
+[importlinter:contract:patrones]
+name = FF-02 Independencia de implementaciones de patrones
+type = independence
+modules =
+    bibliounsa_lab07.politicas
+    bibliounsa_lab07.estados
+    bibliounsa_lab07.adaptadores

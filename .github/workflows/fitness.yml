@@ -1,0 +1,30 @@
+name: lab08-fitness
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  arquitectura:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: python -m pip install pytest import-linter
+
+      - name: Ejecutar pruebas
+        env:
+          PYTHONPATH: .:src
+        run: python -m pytest -q tests/test_fitness.py tests/test_estructura.py
+
+      - name: Verificar arquitectura
+        env:
+          PYTHONPATH: .:src
+        run: lint-imports

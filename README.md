@@ -162,3 +162,32 @@ Las vistas se validaron y exportaron mediante GitHub Actions a PlantUML y Mermai
 | Complejidad promedio | 1.71 (A) |
 | Lineas de código (SLOC) | 276 |
 |  Indice de mantenibilidad de `servicios.py` | 65.92 (B) |
+
+---
+
+## Diseño de arquitectura (Lab 08)
+
+### Árbol de utilidad
+
+![Árbol de utilidad](docs/architecture/utilidad/arbol.png)
+
+### Tabla de iteraciones
+
+| Escenario | Táctica | Evidencia | ¿Cumple? |
+|---|---|---|---|
+| QA-03 — Disponibilidad | Cola durable en PostgreSQL y procesamiento diferido | Simulación de 100 solicitudes durante una caída de 20 minutos: las pérdidas disminuyeron de 20 a 0. Se recuperaron las 20 pendientes en 4 minutos. | Sí, en simulación |
+| QA-01 — Rendimiento | Índices en PostgreSQL y caché con TTL como complemento | Simulación de 1200 muestras: p95 de 830.61 ms sin optimizar, 340.79 ms con índices y 155.42 ms con índice y caché. Objetivo: p95 ≤ 500 ms. | Sí, en simulación |
+| QA-05 — Seguridad | Autorización de operaciones en backend | Simulación de 100 intentos no autorizados: los accesos indebidos disminuyeron de 100 a 0. Se aprobaron cuatro pruebas de seguridad. | Sí, en simulación |
+
+### Enlace a ADR
+
+- [ADR-006: Rendimiento de catalogo](./docs/architecture/adr/006-rendimiento-de-catalogo.md)
+- [ADR-007: Disponibilidad de integración](./docs/architecture/adr/007-disponibilidad-integración.md)
+- [ADR-008: Seguridad de operaciones](./docs/architecture/adr/008-seguridad-de-operaciones.md)
+
+
+### Badge de workflow de fitness functions
+
+Se utiliza GitHub Actions para ejecutar automáticamente las fitness functions y verificar el cumplimiento de los criterios de calidad establecidos.
+
+![lab08-fitness](https://github.com/JoaquinQFox/cs-2026b-lab04-grupoB/actions/workflows/fitness.yml/badge.svg)
