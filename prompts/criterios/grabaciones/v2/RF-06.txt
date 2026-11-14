@@ -1,0 +1,44 @@
+{
+  "historia_id": "RF-06",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Inicio de sesión exitoso con cuenta institucional",
+      "tipo": "exito",
+      "dado": [
+        "El estudiante dispone de una cuenta institucional válida.",
+        "El estudiante no ha iniciado sesión en BiblioUNSA."
+      ],
+      "cuando": "El estudiante inicia sesión con su cuenta institucional válida.",
+      "entonces": [
+        "El sistema permite el inicio de sesión.",
+        "El estudiante puede acceder a BiblioUNSA."
+      ]
+    },
+    {
+      "titulo": "Inicio de sesión con credenciales incorrectas",
+      "tipo": "error",
+      "dado": [
+        "El estudiante intenta iniciar sesión en BiblioUNSA."
+      ],
+      "cuando": "El estudiante proporciona credenciales institucionales incorrectas.",
+      "entonces": [
+        "El sistema rechaza el inicio de sesión.",
+        "El estudiante no obtiene acceso a BiblioUNSA."
+      ]
+    },
+    {
+      "titulo": "Inicio de sesión con cuenta no institucional",
+      "tipo": "error",
+      "dado": [
+        "El estudiante dispone de una cuenta que no pertenece a la institución."
+      ],
+      "cuando": "El estudiante intenta iniciar sesión con dicha cuenta.",
+      "entonces": [
+        "El sistema no permite iniciar sesión con la cuenta no institucional.",
+        "El estudiante no obtiene acceso a BiblioUNSA."
+      ]
+    }
+  ]
+}

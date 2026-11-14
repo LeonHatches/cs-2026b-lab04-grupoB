@@ -1,0 +1,68 @@
+{
+  "historia_id": "HU-05",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Reserva exitosa con matrícula vigente",
+      "tipo": "exito",
+      "dado": [
+        "El estudiante de la UNSA tiene matrícula vigente.",
+        "El ejemplar del libro se encuentra disponible para reserva."
+      ],
+      "cuando": "El estudiante selecciona el ejemplar y solicita su reserva, y el sistema valida su matrícula y la disponibilidad del ejemplar.",
+      "entonces": [
+        "El sistema confirma que la matrícula está vigente.",
+        "La reserva del ejemplar se registra correctamente.",
+        "El sistema muestra una confirmación de la reserva para su posterior recojo en la biblioteca.",
+        "El ejemplar deja de mostrarse como disponible para nuevas reservas."
+      ]
+    },
+    {
+      "titulo": "Reserva rechazada por matrícula no vigente",
+      "tipo": "error",
+      "dado": [
+        "El estudiante de la UNSA no tiene matrícula vigente.",
+        "El ejemplar solicitado se encuentra disponible."
+      ],
+      "cuando": "El estudiante intenta reservar el ejemplar y el sistema valida su matrícula.",
+      "entonces": [
+        "El sistema identifica que la matrícula no está vigente.",
+        "El sistema informa que no se puede completar la reserva por la validación de matrícula.",
+        "No se registra ninguna reserva del ejemplar.",
+        "El ejemplar mantiene su disponibilidad."
+      ]
+    },
+    {
+      "titulo": "Conflicto por reserva simultánea del mismo ejemplar",
+      "tipo": "borde",
+      "dado": [
+        "Dos estudiantes de la UNSA tienen matrícula vigente.",
+        "Ambos estudiantes seleccionan el mismo ejemplar cuando aparece disponible.",
+        "Los estudiantes intentan reservarlo de manera simultánea."
+      ],
+      "cuando": "Ambos estudiantes envían sus solicitudes de reserva y el sistema procesa la validación de matrícula y disponibilidad.",
+      "entonces": [
+        "El sistema evita que el mismo ejemplar tenga dos reservas simultáneas incompatibles.",
+        "Solo se registra una reserva válida del ejemplar.",
+        "El estudiante cuya reserva no se registra recibe una notificación de que el ejemplar ya no está disponible.",
+        "El sistema mantiene un estado de disponibilidad coherente con la reserva registrada."
+      ]
+    },
+    {
+      "titulo": "Intento de reserva de un ejemplar no disponible",
+      "tipo": "error",
+      "dado": [
+        "El estudiante de la UNSA tiene matrícula vigente.",
+        "El ejemplar solicitado no se encuentra disponible para reserva."
+      ],
+      "cuando": "El estudiante intenta reservar el ejemplar y el sistema verifica su disponibilidad.",
+      "entonces": [
+        "El sistema identifica que el ejemplar no está disponible.",
+        "El sistema informa al estudiante que no puede completar la reserva.",
+        "No se registra ninguna nueva reserva del ejemplar.",
+        "El estado de disponibilidad del ejemplar permanece sin cambios."
+      ]
+    }
+  ]
+}

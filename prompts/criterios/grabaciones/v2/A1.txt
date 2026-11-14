@@ -1,0 +1,33 @@
+{
+  "historia_id": "A1",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Consultar un libro con ejemplares disponibles",
+      "tipo": "exito",
+      "dado": [
+        "Que el estudiante desea consultar la disponibilidad de un libro",
+        "Que el libro tiene al menos un ejemplar disponible"
+      ],
+      "cuando": "El estudiante consulta la disponibilidad del libro",
+      "entonces": [
+        "El sistema indica que existen ejemplares disponibles",
+        "El estudiante puede conocer la disponibilidad para decidir si solicita una reserva"
+      ]
+    },
+    {
+      "titulo": "Consultar un libro sin ejemplares disponibles",
+      "tipo": "borde",
+      "dado": [
+        "Que el estudiante desea consultar la disponibilidad de un libro",
+        "Que el libro no tiene ejemplares disponibles"
+      ],
+      "cuando": "El estudiante consulta la disponibilidad del libro",
+      "entonces": [
+        "El sistema indica que no hay ejemplares disponibles",
+        "El estudiante puede conocer la falta de disponibilidad antes de decidir si solicita una reserva"
+      ]
+    }
+  ]
+}

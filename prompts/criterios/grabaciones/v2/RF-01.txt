@@ -1,0 +1,75 @@
+{
+  "historia_id": "RF-01",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Búsqueda de libros por título",
+      "tipo": "exito",
+      "dado": [
+        "El catálogo contiene libros registrados con títulos."
+      ],
+      "cuando": "El estudiante busca un libro por su título.",
+      "entonces": [
+        "El sistema muestra los libros cuyos títulos coinciden con la búsqueda."
+      ]
+    },
+    {
+      "titulo": "Búsqueda de libros por autor",
+      "tipo": "exito",
+      "dado": [
+        "El catálogo contiene libros asociados a autores."
+      ],
+      "cuando": "El estudiante busca libros por autor.",
+      "entonces": [
+        "El sistema muestra los libros correspondientes al autor buscado."
+      ]
+    },
+    {
+      "titulo": "Búsqueda de libros por categoría",
+      "tipo": "exito",
+      "dado": [
+        "El catálogo contiene libros clasificados por categorías."
+      ],
+      "cuando": "El estudiante busca libros por una categoría.",
+      "entonces": [
+        "El sistema muestra los libros pertenecientes a la categoría indicada."
+      ]
+    },
+    {
+      "titulo": "Búsqueda de libros por disponibilidad",
+      "tipo": "exito",
+      "dado": [
+        "El catálogo contiene libros con información de disponibilidad."
+      ],
+      "cuando": "El estudiante busca libros según su disponibilidad.",
+      "entonces": [
+        "El sistema muestra los libros que cumplen con la disponibilidad solicitada."
+      ]
+    },
+    {
+      "titulo": "Búsqueda sin coincidencias",
+      "tipo": "borde",
+      "dado": [
+        "El catálogo no contiene libros que coincidan con el criterio buscado."
+      ],
+      "cuando": "El estudiante realiza una búsqueda por título, autor, categoría o disponibilidad.",
+      "entonces": [
+        "El sistema informa que no se encontraron libros que coincidan con la búsqueda.",
+        "No se muestran libros que incumplan el criterio solicitado."
+      ]
+    },
+    {
+      "titulo": "Búsqueda de libros no disponibles",
+      "tipo": "borde",
+      "dado": [
+        "El catálogo contiene libros disponibles y no disponibles."
+      ],
+      "cuando": "El estudiante busca únicamente libros disponibles.",
+      "entonces": [
+        "El sistema muestra los libros disponibles.",
+        "Los libros no disponibles quedan excluidos de los resultados."
+      ]
+    }
+  ]
+}

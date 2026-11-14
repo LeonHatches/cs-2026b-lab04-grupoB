@@ -1,0 +1,46 @@
+{
+  "historia_id": "A1",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Consulta de ejemplares disponibles",
+      "tipo": "exito",
+      "dado": [
+        "El estudiante accede al catálogo de BiblioUNSA.",
+        "El libro consultado tiene ejemplares disponibles."
+      ],
+      "cuando": "El estudiante consulta la disponibilidad de ejemplares del libro.",
+      "entonces": [
+        "El sistema muestra que hay ejemplares disponibles.",
+        "El estudiante puede identificar la disponibilidad para decidir si solicita una reserva."
+      ]
+    },
+    {
+      "titulo": "Consulta de ejemplares no disponibles",
+      "tipo": "borde",
+      "dado": [
+        "El estudiante accede al catálogo de BiblioUNSA.",
+        "El libro consultado tiene ejemplares registrados, pero ninguno está disponible."
+      ],
+      "cuando": "El estudiante consulta la disponibilidad de ejemplares del libro.",
+      "entonces": [
+        "El sistema indica que no hay ejemplares disponibles.",
+        "El estudiante puede conocer la falta de disponibilidad antes de decidir si solicita una reserva."
+      ]
+    },
+    {
+      "titulo": "Consulta de un libro sin ejemplares registrados",
+      "tipo": "borde",
+      "dado": [
+        "El estudiante accede al catálogo de BiblioUNSA.",
+        "El libro consultado no tiene ejemplares registrados."
+      ],
+      "cuando": "El estudiante consulta la disponibilidad del libro.",
+      "entonces": [
+        "El sistema informa que no hay ejemplares registrados para el libro consultado.",
+        "El sistema no presenta ejemplares disponibles inexistentes."
+      ]
+    }
+  ]
+}

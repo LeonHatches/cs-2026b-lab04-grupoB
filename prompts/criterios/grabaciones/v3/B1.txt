@@ -1,0 +1,10 @@
+{
+  "historia_id": "B1",
+  "invest_ok": false,
+  "preguntas": [
+    "¿Cuál es el tiempo máximo de respuesta esperado para las operaciones principales de BiblioUNSA, como buscar libros, consultar disponibilidad o realizar reservas?",
+    "¿Qué criterios observables permitirán determinar que el sistema es fácil de usar?",
+    "¿Qué tareas específicas deben evaluarse para comprobar la rapidez y facilidad de uso del sistema?"
+  ],
+  "escenarios": []
+}
