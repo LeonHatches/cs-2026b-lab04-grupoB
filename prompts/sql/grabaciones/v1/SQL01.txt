@@ -1,0 +1,8 @@
+```
+SELECT *
+FROM libros
+WHERE titulo LIKE :titulo;
+{
+  "titulo": "%álgebra%"
+}
+```

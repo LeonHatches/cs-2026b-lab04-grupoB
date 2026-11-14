@@ -1,0 +1,8 @@
+{
+  "consulta_sql": null,
+  "parametros": {},
+  "requiere_aclaracion": true,
+  "preguntas": [
+    "¿Puedes proporcionar el esquema real de la base de datos BiblioUNSA, incluyendo las tablas y columnas donde se almacenan los libros y sus títulos?"
+  ]
+}

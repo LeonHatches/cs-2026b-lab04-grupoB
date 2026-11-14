@@ -1,0 +1,13 @@
+```sql
+SELECT *
+FROM libros
+WHERE autor = :autor;
+```
+
+Parámetro:
+
+```json
+{
+  "autor": "Nombre del autor"
+}
+```

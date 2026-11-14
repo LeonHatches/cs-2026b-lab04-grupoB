@@ -1,0 +1,8 @@
+{
+  "consulta_sql": "SELECT prestamos.id, prestamos.ejemplar_id, libros.titulo, prestamos.fecha_vencimiento FROM prestamos INNER JOIN ejemplares ON prestamos.ejemplar_id = ejemplares.id INNER JOIN libros ON ejemplares.libro_id = libros.id WHERE prestamos.fecha_vencimiento < :fecha_actual AND prestamos.fecha_devolucion IS NULL",
+  "parametros": {
+    "fecha_actual": "2026-11-14"
+  },
+  "requiere_aclaracion": false,
+  "preguntas": []
+}

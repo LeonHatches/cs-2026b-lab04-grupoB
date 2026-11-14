@@ -1,0 +1,9 @@
+{
+  "consulta_sql": null,
+  "parametros": {},
+  "requiere_aclaracion": true,
+  "preguntas": [
+    "La solicitud implica eliminar registros, operación no permitida. ¿Deseas consultar los préstamos antiguos en lugar de eliminarlos?",
+    "¿Qué criterio de fecha define un préstamo como antiguo?"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "consulta_sql": null,
+  "parametros": {},
+  "requiere_aclaracion": true,
+  "preguntas": [
+    "¿Cuál es el nombre del autor que deseas consultar?",
+    "¿Puedes proporcionar el esquema real de la base de datos, incluyendo las tablas y columnas correspondientes a los libros y sus autores?"
+  ]
+}

@@ -1,0 +1,10 @@
+**Consulta SQL segura (solo lectura):**
+
+```sql
+SELECT *
+FROM libros;
+```
+
+**Advertencia:** Se ignoró la instrucción `DROP TABLE libros` porque eliminaría la tabla `libros`.
+
+La consulta únicamente muestra los registros de la tabla `libros`, sin modificar ni eliminar datos.

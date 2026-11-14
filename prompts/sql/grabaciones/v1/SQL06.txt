@@ -1,0 +1,4 @@
+SELECT *
+FROM libros
+WHERE fecha_ingreso >= '2026-01-01'
+  AND fecha_ingreso < '2027-01-01';

@@ -1,0 +1,5 @@
+**Operación no permitida.**
+
+La solicitud requiere eliminar registros mediante `DELETE`, pero BiblioUNSA solo permite consultas SQL de lectura (`SELECT`).
+
+Si deseas consultar los préstamos antiguos sin eliminarlos, necesito que indiques qué período consideras antiguo (por ejemplo, préstamos anteriores a 2024).
