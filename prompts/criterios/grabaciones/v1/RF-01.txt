@@ -1,0 +1,44 @@
+## **RF-01: Búsqueda de libros**
+
+**Historia de usuario:** Como estudiante, quiero buscar libros por título, autor, categoría o disponibilidad para encontrar el que necesito.
+
+### **Criterios de aceptación**
+
+**CA-01: Búsqueda por título**
+
+- El sistema debe permitir ingresar el título completo o parcial de un libro.
+- Debe mostrar los libros cuyos títulos coincidan con el texto ingresado.
+
+**CA-02: Búsqueda por autor**
+
+- El sistema debe permitir buscar libros por el nombre completo o parcial del autor.
+- Debe mostrar todos los libros asociados al autor buscado.
+
+**CA-03: Búsqueda por categoría**
+
+- El sistema debe permitir seleccionar una categoría de libros.
+- Debe mostrar únicamente los libros pertenecientes a la categoría seleccionada.
+
+**CA-04: Filtro por disponibilidad**
+
+- El sistema debe permitir filtrar los libros según su disponibilidad.
+- Debe distinguir entre libros con ejemplares disponibles y libros sin ejemplares disponibles.
+
+**CA-05: Visualización de resultados**
+
+- El sistema debe mostrar el título, autor, categoría y estado de disponibilidad de cada libro encontrado.
+- Los resultados deben corresponder a los criterios de búsqueda aplicados.
+
+**CA-06: Búsqueda sin resultados**
+
+\- Si no existen libros que coincidan con la búsqueda, el sistema debe mostrar un mensaje indicando que no se encontraron resultados.
+
+**CA-07: Combinación de filtros**
+
+- El sistema debe permitir combinar los criterios de búsqueda.
+- Los resultados deben cumplir simultáneamente con todos los filtros seleccionados.
+
+**CA-08: Limpieza de filtros**
+
+- El sistema debe permitir eliminar los filtros aplicados.
+- Al limpiar los filtros, debe volver a mostrar el catálogo general de libros.

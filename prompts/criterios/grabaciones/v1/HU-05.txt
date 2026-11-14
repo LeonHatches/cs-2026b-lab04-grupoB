@@ -1,0 +1,105 @@
+## **HU-05: Reserva de ejemplar de libro**
+
+**Historia de usuario:** Como estudiante de la UNSA, quiero reservar un ejemplar disponible de un libro, previa validación de mi matrícula vigente, para recogerlo en la biblioteca sin conflictos de disponibilidad.
+
+### **Criterios de aceptación**
+
+|   |
+| - |
+
+ID
+
+|   |
+| - |
+
+Criterio de aceptación
+
+|   |
+| - |
+
+CA-01
+
+|   |
+| - |
+
+El sistema debe verificar que el estudiante tenga una matrícula vigente antes de permitir la reserva.
+
+|   |
+| - |
+
+CA-02
+
+|   |
+| - |
+
+Si la matrícula no está vigente, el sistema debe rechazar la reserva y mostrar un mensaje informativo.
+
+|   |
+| - |
+
+CA-03
+
+|   |
+| - |
+
+El sistema solo debe permitir reservar ejemplares que se encuentren disponibles.
+
+|   |
+| - |
+
+CA-04
+
+|   |
+| - |
+
+Si el ejemplar ya está reservado o prestado, el sistema debe impedir su reserva.
+
+|   |
+| - |
+
+CA-05
+
+|   |
+| - |
+
+El sistema debe evitar que dos estudiantes reserven simultáneamente el mismo ejemplar.
+
+|   |
+| - |
+
+CA-06
+
+|   |
+| - |
+
+Al confirmar la reserva, el sistema debe registrar al estudiante, el ejemplar, la fecha y el estado de la reserva.
+
+|   |
+| - |
+
+CA-07
+
+|   |
+| - |
+
+Una vez realizada la reserva, el ejemplar debe cambiar su estado a «Reservado» para evitar nuevas reservas.
+
+|   |
+| - |
+
+CA-08
+
+|   |
+| - |
+
+El sistema debe mostrar un mensaje de confirmación con los datos de la reserva y la información necesaria para recoger el ejemplar.
+
+### **Escenario principal (Given / When / Then)**
+
+**Dado** que el estudiante tiene una matrícula vigente y existe un ejemplar disponible del libro,
+
+**Cuando** el estudiante solicita y confirma la reserva,
+
+**Entonces** el sistema registra la reserva, cambia el estado del ejemplar a «Reservado» y muestra la confirmación correspondiente.
+
+**Resultado esperado:** El estudiante puede reservar un ejemplar únicamente si cumple con la validación de matrícula y existe disponibilidad, evitando reservas duplicadas o simultáneas sobre el mismo ejemplar.
