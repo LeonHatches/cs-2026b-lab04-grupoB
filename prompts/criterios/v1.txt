@@ -1,0 +1,2 @@
+# VERSION: v1
+Escribe criterios de aceptación para la historia {{id}}: {{historia}}

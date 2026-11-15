@@ -1,0 +1,43 @@
+{
+  "historia_id": "RF-04",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Consulta de multas pendientes",
+      "tipo": "exito",
+      "dado": [
+        "El estudiante tiene multas por resolver registradas en BiblioUNSA."
+      ],
+      "cuando": "El estudiante consulta sus multas.",
+      "entonces": [
+        "El sistema muestra las multas correspondientes al estudiante.",
+        "El estudiante puede identificar cuáles tiene por resolver."
+      ]
+    },
+    {
+      "titulo": "Consulta sin multas registradas",
+      "tipo": "borde",
+      "dado": [
+        "El estudiante no tiene multas registradas."
+      ],
+      "cuando": "El estudiante consulta sus multas.",
+      "entonces": [
+        "El sistema informa que el estudiante no tiene multas registradas.",
+        "No se muestran multas de otros estudiantes."
+      ]
+    },
+    {
+      "titulo": "Consulta de multas sin pendientes por resolver",
+      "tipo": "borde",
+      "dado": [
+        "El estudiante tiene multas registradas.",
+        "Ninguna de sus multas está pendiente de resolver."
+      ],
+      "cuando": "El estudiante consulta sus multas.",
+      "entonces": [
+        "El sistema permite identificar que no existen multas pendientes por resolver."
+      ]
+    }
+  ]
+}

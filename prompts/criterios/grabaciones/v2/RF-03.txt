@@ -1,0 +1,44 @@
+{
+  "historia_id": "RF-03",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Registrar préstamo con carné QR de un estudiante",
+      "tipo": "exito",
+      "dado": [
+        "El bibliotecario desea registrar un préstamo.",
+        "El estudiante dispone de un carné QR que permite identificarlo."
+      ],
+      "cuando": "El bibliotecario utiliza el carné QR para registrar el préstamo.",
+      "entonces": [
+        "El préstamo queda registrado.",
+        "El préstamo queda asociado al estudiante identificado mediante el carné QR."
+      ]
+    },
+    {
+      "titulo": "Evitar la asociación del préstamo a un estudiante incorrecto",
+      "tipo": "error",
+      "dado": [
+        "El bibliotecario desea registrar un préstamo.",
+        "El carné QR utilizado identifica a un estudiante determinado."
+      ],
+      "cuando": "El bibliotecario registra el préstamo utilizando ese carné QR.",
+      "entonces": [
+        "El préstamo no queda asociado a un estudiante diferente del identificado mediante el carné QR."
+      ]
+    },
+    {
+      "titulo": "Carné QR que no permite identificar al estudiante",
+      "tipo": "borde",
+      "dado": [
+        "El bibliotecario desea registrar un préstamo.",
+        "El carné QR utilizado no permite identificar a un estudiante."
+      ],
+      "cuando": "El bibliotecario intenta registrar el préstamo mediante ese carné QR.",
+      "entonces": [
+        "El préstamo no queda asociado a un estudiante cuya identidad no haya sido determinada mediante el carné QR."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "historia_id": "RF-01",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Búsqueda de libros por título",
+      "tipo": "exito",
+      "dado": [
+        "El estudiante accede al catálogo de BiblioUNSA",
+        "Existen libros registrados que coinciden con el título buscado"
+      ],
+      "cuando": "El estudiante realiza una búsqueda por título",
+      "entonces": [
+        "Se muestran los libros cuyos títulos coinciden con la búsqueda",
+        "El estudiante puede identificar los libros encontrados"
+      ]
+    },
+    {
+      "titulo": "Búsqueda de libros por autor o categoría",
+      "tipo": "exito",
+      "dado": [
+        "El catálogo contiene libros asociados al autor o categoría consultados"
+      ],
+      "cuando": "El estudiante busca libros por autor o categoría",
+      "entonces": [
+        "Se muestran los libros que coinciden con el criterio seleccionado",
+        "Los resultados permiten identificar los libros encontrados"
+      ]
+    },
+    {
+      "titulo": "Búsqueda de libros por disponibilidad",
+      "tipo": "exito",
+      "dado": [
+        "El catálogo contiene libros con diferentes estados de disponibilidad"
+      ],
+      "cuando": "El estudiante realiza una búsqueda utilizando el criterio de disponibilidad",
+      "entonces": [
+        "Se muestran los libros que cumplen con el criterio de disponibilidad seleccionado",
+        "Los resultados corresponden al criterio consultado"
+      ]
+    },
+    {
+      "titulo": "Búsqueda sin resultados",
+      "tipo": "borde",
+      "dado": [
+        "No existen libros que coincidan con el criterio de búsqueda ingresado"
+      ],
+      "cuando": "El estudiante realiza una búsqueda por título, autor, categoría o disponibilidad",
+      "entonces": [
+        "El sistema informa que no se encontraron libros coincidentes",
+        "No se muestran libros que incumplan el criterio de búsqueda"
+      ]
+    }
+  ]
+}

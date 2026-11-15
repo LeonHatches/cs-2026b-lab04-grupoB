@@ -1,0 +1,41 @@
+## **RF-03: Registrar préstamo mediante carné QR**
+
+**Historia de usuario:** Como bibliotecario, quiero registrar un préstamo mediante el carné QR para asociarlo al estudiante correcto.
+
+### **Criterios de aceptación**
+
+**CA-01: Identificación del estudiante**
+
+- **Dado** que el bibliotecario está en el módulo de préstamos,
+- **Cuando** escanea el código QR del carné,
+- **Entonces** el sistema debe identificar al estudiante y mostrar sus datos para confirmar su identidad.
+
+**CA-02: Validación del estudiante**
+
+- **Dado** que el estudiante ha sido identificado,
+- **Cuando** el sistema verifica su matrícula vigente y su habilitación para préstamos,
+- **Entonces** debe permitir continuar únicamente si cumple las condiciones establecidas.
+
+**CA-03: Registro del préstamo**
+
+- **Dado** que el estudiante está habilitado y el ejemplar está disponible,
+- **Cuando** el bibliotecario confirma el préstamo,
+- **Entonces** el sistema debe registrar el estudiante, el ejemplar, la fecha del préstamo y la fecha de devolución prevista.
+
+**CA-04: Actualización de disponibilidad**
+
+- **Dado** que el préstamo se registró correctamente,
+- **Cuando** el sistema actualiza el estado del ejemplar,
+- **Entonces** debe marcarlo como prestado e impedir que sea asignado a otro estudiante.
+
+**CA-05: Código QR inválido**
+
+- **Dado** que el bibliotecario intenta escanear un código QR,
+- **Cuando** el código es inválido, ilegible o no corresponde a un estudiante registrado,
+- **Entonces** el sistema debe mostrar un mensaje de error y no permitir el registro del préstamo.
+
+**CA-06: Confirmación del préstamo**
+
+- **Dado** que el bibliotecario ha confirmado el registro,
+- **Cuando** el sistema completa correctamente la operación,
+- **Entonces** debe mostrar un mensaje de éxito con los datos del préstamo registrado.

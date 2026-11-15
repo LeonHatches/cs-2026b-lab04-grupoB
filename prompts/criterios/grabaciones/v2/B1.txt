@@ -1,0 +1,12 @@
+{
+  "historia_id": "B1",
+  "invest_ok": false,
+  "preguntas": [
+    "¿Qué funcionalidades del sistema deben cumplir el requisito de rapidez?",
+    "¿Cuál es el tiempo máximo de respuesta aceptable para considerar que el sistema es rápido?",
+    "¿Qué operaciones o tareas deben ser fáciles de realizar para los usuarios?",
+    "¿Qué criterios observables permitirán determinar que el sistema es fácil de usar?",
+    "¿Qué tipos de usuarios deben participar en la evaluación de facilidad de uso?"
+  ],
+  "escenarios": []
+}

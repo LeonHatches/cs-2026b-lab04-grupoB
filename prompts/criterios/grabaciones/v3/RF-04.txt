@@ -1,0 +1,43 @@
+{
+  "historia_id": "RF-04",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Consulta con multas registradas",
+      "tipo": "exito",
+      "dado": [
+        "el estudiante tiene multas registradas"
+      ],
+      "cuando": "el estudiante consulta sus multas",
+      "entonces": [
+        "se muestran las multas asociadas al estudiante",
+        "el estudiante puede identificar las multas que tiene por resolver"
+      ]
+    },
+    {
+      "titulo": "Consulta sin multas registradas",
+      "tipo": "borde",
+      "dado": [
+        "el estudiante no tiene multas registradas"
+      ],
+      "cuando": "el estudiante consulta sus multas",
+      "entonces": [
+        "se informa que el estudiante no tiene multas registradas",
+        "no se muestran multas de otros estudiantes"
+      ]
+    },
+    {
+      "titulo": "Error al consultar las multas",
+      "tipo": "error",
+      "dado": [
+        "la información de multas no está disponible para la consulta"
+      ],
+      "cuando": "el estudiante intenta consultar sus multas",
+      "entonces": [
+        "se informa que no fue posible completar la consulta",
+        "no se presentan resultados incompletos como si fueran información confirmada"
+      ]
+    }
+  ]
+}

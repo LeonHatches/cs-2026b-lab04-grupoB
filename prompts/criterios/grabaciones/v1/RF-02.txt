@@ -1,0 +1,33 @@
+## **RF-02: Cancelar reserva de libro**
+
+**Historia de usuario:** Como estudiante, quiero cancelar una reserva que ya no necesito para liberar el ejemplar.
+
+### **Criterios de aceptación**
+
+**CA-01: Visualización de reservas**
+
+\- Dado que el estudiante ha iniciado sesión, cuando acceda a sus reservas, entonces el sistema debe mostrar sus reservas y permitir cancelar aquellas que estén activas.
+
+**CA-02: Cancelación de reserva**
+
+\- Dado que el estudiante tiene una reserva activa, cuando seleccione la opción de cancelar, entonces el sistema debe solicitar una confirmación antes de realizar la cancelación.
+
+**CA-03: Confirmación de cancelación**
+
+\- Dado que el estudiante confirma la cancelación, cuando el sistema procese la solicitud, entonces debe cambiar el estado de la reserva a "Cancelada".
+
+**CA-04: Liberación del ejemplar**
+
+\- Dado que una reserva ha sido cancelada correctamente, cuando el sistema actualice la disponibilidad, entonces el ejemplar debe quedar disponible para nuevas reservas, siempre que no exista otra restricción.
+
+**CA-05: Restricción de cancelación**
+
+\- Dado que una reserva ya fue cancelada o el ejemplar fue entregado en préstamo, cuando el estudiante intente cancelarla, entonces el sistema debe impedir la operación e informar el motivo.
+
+**CA-06: Notificación de cancelación**
+
+\- Dado que la reserva fue cancelada exitosamente, cuando finalice el proceso, entonces el sistema debe mostrar un mensaje de confirmación al estudiante.
+
+**CA-07: Cancelación voluntaria**
+
+\- Dado que el estudiante seleccionó cancelar una reserva, cuando decida no confirmar la operación, entonces el sistema debe mantener la reserva activa y conservar la disponibilidad del ejemplar sin cambios.

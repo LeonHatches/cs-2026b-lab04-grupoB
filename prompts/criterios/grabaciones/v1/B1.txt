@@ -1,0 +1,43 @@
+## **B1: Rapidez y facilidad de uso del sistema**
+
+**Historia:** Que el sistema BiblioUNSA sea rápido y fácil de usar.
+
+### **Criterios de aceptación**
+
+**CA-01: Tiempo de respuesta**
+
+- Dado que el usuario realiza una acción en el sistema,
+- Cuando ejecuta una búsqueda o consulta,
+- Entonces el sistema debe mostrar los resultados en un máximo de 3 segundos bajo condiciones normales de operación.
+
+**CA-02: Navegación intuitiva**
+
+- Dado que el usuario ingresa al sistema,
+- Cuando necesita acceder a una funcionalidad,
+- Entonces debe poder encontrarla mediante un menú claro y organizado, sin superar 3 pasos de navegación.
+
+**CA-03: Interfaz comprensible**
+
+- Dado que el usuario utiliza BiblioUNSA,
+- Cuando visualiza las opciones, botones y formularios,
+- Entonces estos deben presentar nombres claros y comprensibles.
+
+**CA-04: Mensajes de retroalimentación**
+
+- Dado que el usuario realiza una operación,
+- Cuando esta finaliza correctamente o presenta un error,
+- Entonces el sistema debe mostrar un mensaje que indique el resultado de la operación.
+
+**CA-05: Facilidad de aprendizaje**
+
+- Dado que un estudiante utiliza el sistema por primera vez,
+- Cuando intenta buscar un libro y consultar su disponibilidad,
+- Entonces debe poder completar ambas acciones sin asistencia externa.
+
+**CA-06: Rendimiento con usuarios concurrentes**
+
+- Dado que varios usuarios utilizan BiblioUNSA simultáneamente,
+- Cuando hasta 50 usuarios realizan búsquedas o consultas,
+- Entonces el sistema debe mantener un tiempo de respuesta máximo de 3 segundos para al menos el 95 % de las solicitudes.
+
+**Nota:** Los valores de 3 segundos, 3 pasos y 50 usuarios son umbrales iniciales propuestos. Deben validarse según las necesidades y recursos del proyecto.

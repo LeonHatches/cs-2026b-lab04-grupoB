@@ -1,0 +1,41 @@
+## **RF-04: Consultar multas**
+
+**Historia de usuario:** Como estudiante, quiero consultar mis multas para saber si tengo alguna por resolver.
+
+### **Criterios de aceptación**
+
+**CA-01: Consulta de multas**
+
+- **Dado** que el estudiante ha iniciado sesión en el sistema,
+- **Cuando** acceda a la sección «Mis multas»,
+- **Entonces** el sistema deberá mostrar las multas asociadas a su cuenta.
+
+**CA-02: Visualización del detalle de multas**
+
+- **Dado** que el estudiante tiene multas registradas,
+- **Cuando** consulte sus multas,
+- **Entonces** el sistema deberá mostrar el motivo, monto, fecha de generación y estado de cada multa.
+
+**CA-03: Estudiante sin multas**
+
+- **Dado** que el estudiante no tiene multas registradas,
+- **Cuando** acceda a la sección «Mis multas»,
+- **Entonces** el sistema deberá mostrar el mensaje «No tienes multas registradas».
+
+**CA-04: Identificación de multas pendientes**
+
+- **Dado** que el estudiante tiene multas pendientes y resueltas,
+- **Cuando** consulte el listado de multas,
+- **Entonces** el sistema deberá permitir distinguir cuáles están pendientes de resolución.
+
+**CA-05: Privacidad de la información**
+
+- **Dado** que el estudiante ha iniciado sesión,
+- **Cuando** consulte sus multas,
+- **Entonces** el sistema deberá mostrar únicamente las multas asociadas a su cuenta, sin permitir acceder a las de otros estudiantes.
+
+**CA-06: Error al consultar multas**
+
+- **Dado** que ocurre un error al recuperar la información,
+- **Cuando** el estudiante intente consultar sus multas,
+- **Entonces** el sistema deberá mostrar un mensaje de error y permitir reintentar la consulta.

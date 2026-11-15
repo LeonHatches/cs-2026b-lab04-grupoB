@@ -1,0 +1,47 @@
+## **RF-06: Inicio de sesión con cuenta institucional**
+
+**Historia de usuario:** Como estudiante, quiero iniciar sesión con mi cuenta institucional para acceder a BiblioUNSA.
+
+### **Criterios de aceptación**
+
+**CA-01: Inicio de sesión exitoso**
+
+- **Dado** que el estudiante tiene una cuenta institucional válida y activa.
+- **Cuando** ingresa sus credenciales correctamente.
+- **Entonces** el sistema permite el acceso a BiblioUNSA y muestra la página principal.
+
+**CA-02: Credenciales incorrectas**
+
+- **Dado** que el estudiante se encuentra en la pantalla de inicio de sesión.
+- **Cuando** ingresa credenciales incorrectas.
+- **Entonces** el sistema deniega el acceso y muestra un mensaje de error sin revelar qué dato es incorrecto.
+
+**CA-03: Validación de campos obligatorios**
+
+- **Dado** que el estudiante se encuentra en el formulario de inicio de sesión.
+- **Cuando** intenta iniciar sesión sin completar los campos requeridos.
+- **Entonces** el sistema muestra un mensaje indicando que debe completarlos.
+
+**CA-04: Acceso restringido a usuarios autenticados**
+
+- **Dado** que un usuario no ha iniciado sesión.
+- **Cuando** intenta acceder a una funcionalidad protegida de BiblioUNSA.
+- **Entonces** el sistema le solicita autenticarse antes de permitir el acceso.
+
+**CA-05: Cierre de sesión**
+
+- **Dado** que el estudiante ha iniciado sesión correctamente.
+- **Cuando** selecciona la opción «Cerrar sesión».
+- **Entonces** el sistema finaliza su sesión y le impide acceder a funcionalidades protegidas hasta autenticarse nuevamente.
+
+**CA-06: Indisponibilidad del servicio de autenticación**
+
+- **Dado** que el servicio de autenticación institucional no está disponible.
+- **Cuando** el estudiante intenta iniciar sesión.
+- **Entonces** el sistema muestra un mensaje informativo y no permite el acceso sin validar las credenciales.
+
+**CA-07: Sesión expirada**
+
+- **Dado** que el estudiante tiene una sesión iniciada.
+- **Cuando** su sesión expira.
+- **Entonces** el sistema solicita que vuelva a autenticarse para continuar utilizando las funcionalidades protegidas.

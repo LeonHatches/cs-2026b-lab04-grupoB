@@ -1,0 +1,51 @@
+{
+  "historia_id": "RF-03",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Registro exitoso del préstamo mediante carné QR",
+      "tipo": "exito",
+      "dado": [
+        "El bibliotecario desea registrar un préstamo.",
+        "El estudiante presenta un carné QR que permite identificarlo.",
+        "Se ha seleccionado el ejemplar que se prestará."
+      ],
+      "cuando": "El bibliotecario lee el carné QR y registra el préstamo del ejemplar.",
+      "entonces": [
+        "El sistema identifica al estudiante correspondiente al carné QR.",
+        "El préstamo queda registrado y asociado al estudiante identificado.",
+        "El sistema muestra la confirmación del registro del préstamo."
+      ]
+    },
+    {
+      "titulo": "No se puede identificar al estudiante mediante el carné QR",
+      "tipo": "error",
+      "dado": [
+        "El bibliotecario intenta registrar un préstamo.",
+        "El carné QR presentado no permite identificar a un estudiante."
+      ],
+      "cuando": "El bibliotecario intenta registrar el préstamo utilizando el carné QR.",
+      "entonces": [
+        "El sistema indica que no fue posible identificar al estudiante.",
+        "No se registra el préstamo.",
+        "No se asocia el ejemplar a un estudiante no identificado."
+      ]
+    },
+    {
+      "titulo": "Verificación de la asociación del préstamo al estudiante correcto",
+      "tipo": "borde",
+      "dado": [
+        "Existen varios estudiantes registrados.",
+        "El bibliotecario dispone del carné QR de un estudiante específico.",
+        "Se ha seleccionado el ejemplar que se prestará."
+      ],
+      "cuando": "El bibliotecario identifica al estudiante mediante su carné QR y registra el préstamo.",
+      "entonces": [
+        "El sistema registra el préstamo asociado al estudiante identificado por el carné QR.",
+        "El préstamo no queda asociado a otro estudiante.",
+        "La información del préstamo permite comprobar la identidad del estudiante asociado."
+      ]
+    }
+  ]
+}

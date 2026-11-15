@@ -1,0 +1,47 @@
+{
+  "historia_id": "RF-02",
+  "invest_ok": true,
+  "preguntas": [],
+  "escenarios": [
+    {
+      "titulo": "Cancelación exitosa de una reserva",
+      "tipo": "exito",
+      "dado": [
+        "El estudiante tiene una reserva de un ejemplar.",
+        "La reserva está vigente."
+      ],
+      "cuando": "El estudiante solicita cancelar su reserva.",
+      "entonces": [
+        "La reserva queda cancelada.",
+        "El ejemplar asociado queda liberado.",
+        "El estudiante puede comprobar que su reserva fue cancelada."
+      ]
+    },
+    {
+      "titulo": "Cancelación de una reserva inexistente",
+      "tipo": "error",
+      "dado": [
+        "El estudiante no tiene la reserva que intenta cancelar."
+      ],
+      "cuando": "El estudiante solicita cancelar dicha reserva.",
+      "entonces": [
+        "El sistema informa que no existe una reserva que pueda cancelarse.",
+        "No se modifica la disponibilidad de ningún ejemplar."
+      ]
+    },
+    {
+      "titulo": "Cancelación repetida de una reserva",
+      "tipo": "borde",
+      "dado": [
+        "El estudiante tenía una reserva.",
+        "La reserva ya fue cancelada y el ejemplar fue liberado."
+      ],
+      "cuando": "El estudiante intenta cancelar nuevamente la misma reserva.",
+      "entonces": [
+        "El sistema informa que la reserva ya está cancelada.",
+        "La reserva permanece cancelada.",
+        "El ejemplar permanece liberado."
+      ]
+    }
+  ]
+}
