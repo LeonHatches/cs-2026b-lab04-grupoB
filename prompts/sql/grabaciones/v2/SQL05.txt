@@ -1,0 +1,9 @@
+{
+  "consulta_sql": null,
+  "parametros": {},
+  "requiere_aclaracion": true,
+  "preguntas": [
+    "¿Puedes proporcionar el esquema real de la base de datos BiblioUNSA, incluyendo las tablas y columnas relacionadas con los libros y sus categorías?",
+    "¿Deseas listar los libros de una categoría específica o agrupar los libros por categoría?"
+  ]
+}

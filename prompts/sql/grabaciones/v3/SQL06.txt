@@ -1,0 +1,9 @@
+{
+  "consulta_sql": "SELECT id, titulo, autor, categoria, fecha_ingreso FROM libros WHERE fecha_ingreso >= :fecha_inicio AND fecha_ingreso < :fecha_fin",
+  "parametros": {
+    "fecha_inicio": "2026-01-01",
+    "fecha_fin": "2027-01-01"
+  },
+  "requiere_aclaracion": false,
+  "preguntas": []
+}

@@ -1,0 +1,8 @@
+{
+  "consulta_sql": "SELECT ejemplares.id, ejemplares.libro_id, libros.titulo, libros.autor, ejemplares.estado FROM ejemplares INNER JOIN libros ON ejemplares.libro_id = libros.id WHERE LOWER(ejemplares.estado) = LOWER(:estado)",
+  "parametros": {
+    "estado": "disponible"
+  },
+  "requiere_aclaracion": false,
+  "preguntas": []
+}

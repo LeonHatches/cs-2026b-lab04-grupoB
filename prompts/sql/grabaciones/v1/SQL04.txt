@@ -1,0 +1,7 @@
+SELECT
+    id,
+    ejemplar_id,
+    fecha_vencimiento
+FROM prestamos
+WHERE fecha_vencimiento < CURRENT_DATE
+  AND fecha_devolucion IS NULL;

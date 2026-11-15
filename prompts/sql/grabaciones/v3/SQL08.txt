@@ -1,0 +1,6 @@
+{
+  "consulta_sql": "SELECT id, titulo, autor, categoria, fecha_ingreso FROM libros",
+  "parametros": {},
+  "requiere_aclaracion": false,
+  "preguntas": []
+}

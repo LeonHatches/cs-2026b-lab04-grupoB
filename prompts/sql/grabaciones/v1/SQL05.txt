@@ -1,0 +1,13 @@
+```sql
+SELECT *
+FROM libros
+WHERE categoria = :categoria;
+```
+
+Parámetro:
+
+```json
+{
+  "categoria": "Matematicas"
+}
+```

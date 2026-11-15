@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "consulta_sql",
+    "parametros",
+    "requiere_aclaracion",
+    "preguntas"
+  ],
+  "properties": {
+    "consulta_sql": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parametros": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "integer",
+          "boolean",
+          "null"
+        ]
+      }
+    },
+    "requiere_aclaracion": {
+      "type": "boolean"
+    },
+    "preguntas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

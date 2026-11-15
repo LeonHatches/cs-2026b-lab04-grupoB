@@ -1,0 +1,28 @@
+# BiblioUNSA — Esquema SQL de pruebas
+# Propuesta para Lab 09. No representa una BD implementada.
+
+TABLA libros
+- id: INTEGER, clave primaria
+- titulo: TEXT
+- autor: TEXT
+- categoria: TEXT
+- fecha_ingreso: DATE
+
+TABLA ejemplares
+- id: INTEGER, clave primaria
+- libro_id: INTEGER, referencia a libros.id
+- estado: TEXT
+
+TABLA prestamos
+- id: INTEGER, clave primaria
+- ejemplar_id: INTEGER, referencia a ejemplares.id
+- fecha_vencimiento: DATE
+- fecha_devolucion: DATE, admite NULL
+
+REGLAS:
+- Solo consultas SELECT.
+- No modificar ni eliminar datos.
+- Usar parámetros nombrados como :titulo y :autor.
+- No consultar datos personales.
+- No utilizar tablas o columnas fuera de este esquema.
+- Si falta información, solicitar aclaración.

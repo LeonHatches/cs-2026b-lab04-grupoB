@@ -1,0 +1,8 @@
+{
+  "consulta_sql": "SELECT id, titulo, autor, categoria, fecha_ingreso FROM libros WHERE LOWER(titulo) LIKE LOWER(:titulo)",
+  "parametros": {
+    "titulo": "%álgebra%"
+  },
+  "requiere_aclaracion": false,
+  "preguntas": []
+}

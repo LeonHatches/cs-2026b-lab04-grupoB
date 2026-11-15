@@ -1,0 +1,8 @@
+{
+  "consulta_sql": null,
+  "parametros": {},
+  "requiere_aclaracion": true,
+  "preguntas": [
+    "¿De qué categoría deseas consultar los libros?"
+  ]
+}
