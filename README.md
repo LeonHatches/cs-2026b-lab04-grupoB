@@ -191,3 +191,48 @@ Las vistas se validaron y exportaron mediante GitHub Actions a PlantUML y Mermai
 Se utiliza GitHub Actions para ejecutar automáticamente las fitness functions y verificar el cumplimiento de los criterios de calidad establecidos.
 
 [![lab08-fitness](https://github.com/LeonHatches/cs-2026b-lab04-grupoB/actions/workflows/fitness.yml/badge.svg)](https://github.com/LeonHatches/cs-2026b-lab04-grupoB/actions/workflows/fitness.yml)
+
+
+## Prompt engineering (Lab 09)
+
+### Comparación de versiones (tasas de aprobación)
+
+
+| Versión | Tarea A: Criterios | Tarea B: SQL |
+|---|---:|---:|
+| v1 | 0% | 0% |
+| v2 | 100% | 100% |
+| v3 | 100% | 100% |
+
+
+### Gráfico de resultados
+
+El siguiente gráfico representa la comparación de las tasas de aprobación de las tres versiones. Los valores deben actualizarse con los resultados reales de las evaluaciones.
+
+![Grafico resultados de tasas de aprobación](docs/prompts/img/grafico_resultados.png)
+
+### Hallazgos
+
+- La evaluación de las versiones permitió comparar objetivamente la calidad de los prompts.
+- Las pruebas automatizadas verifican que las respuestas respeten el esquema JSON y las condiciones específicas de cada tarea.
+- Los casos ambiguos y de red-team permiten comprobar el comportamiento ante entradas incompletas o instrucciones maliciosas.
+- El proveedor grabado permite repetir las evaluaciones con resultados controlados.
+- Las pruebas con Gemini evidenciaron que un modelo real puede variar sus respuestas ante una misma entrada.
+
+### Enlaces a evidencias y datos
+
+| Elemento solicitado | Tarea A: Criterios de aceptación | Tarea B: Generación SQL |
+|---|---|---|
+| Schema | [esquema.json](prompts/criterios/esquema.json) | [esquema.json](prompts/sql/esquema.json) |
+| Dataset | [casos.yaml](prompts/criterios/casos.yaml) | [casos.yaml](prompts/sql/casos.yaml) |
+| Fixtures | [grabaciones](prompts/criterios/grabaciones/) | [grabaciones](prompts/sql/grabaciones/) |
+| Prompts v1–v3 | [Ver versiones](prompts/criterios/) | [Ver versiones](prompts/sql/) |
+
+**Recursos compartidos:**
+
+- **Red-team:** [red-team.md](prompts/seguridad/red-team.md).
+- **Integración continua (CI):** [prompts.yml](.github/workflows/prompts.yml).
+- **Bitácora de IA:** [bitacora_ia.md](prompts/bitacora_ia.md).
+- **No determinismo:** [no_determinismo.md](prompts/no_determinismo.md).
+- **Proveedor de fixtures:** [proveedor_grabado.py](prompts/proveedor_grabado.py).
+- **Gráfico de resultados:** [grafico_resultados.png](docs/prompts/img/grafico_resultados.png).
