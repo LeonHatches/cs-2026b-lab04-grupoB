@@ -1,0 +1,36 @@
+description: BiblioUNSA - criterios de aceptación con respuestas grabadas
+prompts:
+  - file://v3.txt
+providers:
+  - id: file://../proveedor_grabado.py
+    label: ChatGPT (grabaciones)
+    config:
+      tarea: criterios
+tests:
+  - file://casos_eval.py:generate_tests
+defaultTest:
+  assert:
+    - type: is-json
+      metric: A1_contrato_json
+      value: file://esquema.json
+    - type: javascript
+      metric: A2_identificador
+      value: |
+        try { return JSON.parse(output).historia_id === context.vars.id; }
+        catch { return false; }
+    - type: javascript
+      metric: A3_comportamiento_observable
+      value: |
+        try {
+          const escenarios = JSON.stringify(JSON.parse(output).escenarios || []);
+          return !/\b(?:postgresql|django|mysql|sqlite|react|framework|endpoints?|apis?|base de datos|sql)\b/iu.test(escenarios);
+        } catch { return false; }
+    - type: javascript
+      metric: A5_cobertura_o_aclaracion
+      value: |
+        try {
+          const r = JSON.parse(output);
+          if (r.invest_ok === false) return r.preguntas.length > 0 && r.escenarios.length === 0;
+          return r.invest_ok === true && r.escenarios.some(e => e.tipo === 'exito') &&
+            r.escenarios.some(e => ['error', 'borde'].includes(e.tipo));
+        } catch { return false; }

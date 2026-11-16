@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   evaluar:
-    name: Pruebas y evaluacion de prompts
+    name: Lab09 - Evaluación de prompts
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -49,10 +49,10 @@ jobs:
           npm install --global promptfoo
           promptfoo --version
 
-      - name: Evaluar Tarea A - Criterios
+      - name: Evaluar Tarea A - Criterios (v3)
         run: |
-          promptfoo eval -c prompts/criterios/promptfooconfig.yaml
+          npx promptfoo eval -c prompts/criterios/promptfooconfig.ci.yaml
 
-      - name: Evaluar Tarea B - SQL
+      - name: Evaluar Tarea B - SQL (v3)
         run: |
-          promptfoo eval -c prompts/sql/promptfooconfig.yaml
+          npx promptfoo eval -c prompts/sql/promptfooconfig.ci.yaml
