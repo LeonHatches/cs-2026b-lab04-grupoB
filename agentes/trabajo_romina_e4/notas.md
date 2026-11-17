@@ -1,0 +1,1 @@
+- ISSUE-03: prestamo_vencido está en src/bibliounsa_lab10/dominio.py. La prueba inicial falla porque considera vencido un préstamo DEVUELTO.

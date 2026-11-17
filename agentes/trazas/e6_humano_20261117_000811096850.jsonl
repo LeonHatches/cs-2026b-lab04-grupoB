@@ -1,0 +1,9 @@
+{"tipo": "objetivo", "estado": "INICIO", "texto": "Verificar aprobación humana para ISSUE-02", "t": 0.0, "agente": "ejecutor_e6"}
+{"tipo": "estado", "estado": "DECIDIENDO", "paso": 1, "t": 0.0, "agente": "ejecutor_e6"}
+{"tipo": "estado", "estado": "VALIDANDO_CONTRATO", "paso": 1, "t": 0.0, "agente": "ejecutor_e6"}
+{"tipo": "estado", "estado": "EVALUANDO_POLITICA", "paso": 1, "accion": "editar_archivo", "t": 0.0, "agente": "ejecutor_e6"}
+{"tipo": "estado", "estado": "ESPERANDO_APROBACION", "paso": 1, "accion": "editar_archivo", "texto": "Se solicitó decisión del humano", "t": 0.0, "agente": "ejecutor_e6"}
+{"tipo": "accion", "estado": "BLOQUEADO", "paso": 1, "pensamiento": "Solicitar autorización humana", "accion": "editar_archivo", "args": {"ruta": "src/bibliounsa_lab10/dominio.py", "antes": "    if not disponible:\n        return \"NO_DISPONIBLE\"", "despues": "    if not matricula_vigente:\n        return \"MATRICULA_NO_VIGENTE\"\n    if not disponible:\n        return \"NO_DISPONIBLE\""}, "observacion": "BLOQUEADO POR LA POLÍTICA: El revisor humano rechazó la edición", "bloqueada": true, "t": 2.913, "agente": "ejecutor_e6"}
+{"tipo": "estado", "estado": "DECIDIENDO", "paso": 2, "t": 2.913, "agente": "ejecutor_e6"}
+{"tipo": "estado", "estado": "VALIDANDO_CONTRATO", "paso": 2, "t": 2.913, "agente": "ejecutor_e6"}
+{"tipo": "final", "estado": "FINALIZADO", "paso": 2, "pensamiento": "Registrar el resultado de la política", "texto": "Interacción humana finalizada", "t": 2.913, "agente": "ejecutor_e6"}

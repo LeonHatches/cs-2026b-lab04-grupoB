@@ -1,0 +1,29 @@
+[
+  {
+    "pensamiento": "Reproducir el fallo de matrícula vencida",
+    "accion": "ejecutar_pruebas",
+    "args": {
+      "objetivo": "tests/test_issue_02.py"
+    }
+  },
+  {
+    "pensamiento": "Validar matrícula antes de confirmar la reserva",
+    "accion": "editar_archivo",
+    "args": {
+      "ruta": "src/bibliounsa_lab10/dominio.py",
+      "antes": "    if not disponible:\n        return \"NO_DISPONIBLE\"",
+      "despues": "    if not matricula_vigente:\n        return \"MATRICULA_NO_VIGENTE\"\n    if not disponible:\n        return \"NO_DISPONIBLE\""
+    }
+  },
+  {
+    "pensamiento": "Verificar la regresión del ISSUE-02",
+    "accion": "ejecutar_pruebas",
+    "args": {
+      "objetivo": "tests/test_issue_02.py"
+    }
+  },
+  {
+    "pensamiento": "Corrección aplicada y prueba ejecutada",
+    "final": "ISSUE-02 corregido; revisar observaciones y pruebas"
+  }
+]
