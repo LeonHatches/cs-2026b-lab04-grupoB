@@ -1,0 +1,44 @@
+[
+  {
+    "modo": "unico",
+    "roles": [
+      {
+        "rol": "agente_unico",
+        "acciones": 3,
+        "caracteres_historial": 1310,
+        "resultado": "ISSUE-02 corregido; revisar observaciones y pruebas"
+      }
+    ],
+    "acciones_totales": 3,
+    "caracteres_historial": 1310,
+    "pruebas": "returncode=0\n..                                                                       [100%]\n2 passed in 0.01s",
+    "correccion_verificada": true
+  },
+  {
+    "modo": "multiagente",
+    "roles": [
+      {
+        "rol": "planificador",
+        "acciones": 0,
+        "caracteres_historial": 186,
+        "resultado": "Reproducir ISSUE-02, corregir la validación de matrícula y ejecutar las pruebas"
+      },
+      {
+        "rol": "ejecutor",
+        "acciones": 3,
+        "caracteres_historial": 1385,
+        "resultado": "ISSUE-02 corregido; revisar observaciones y pruebas"
+      },
+      {
+        "rol": "revisor",
+        "acciones": 2,
+        "caracteres_historial": 941,
+        "resultado": "Revisión finalizada; verificar el resultado de las pruebas"
+      }
+    ],
+    "acciones_totales": 5,
+    "caracteres_historial": 2512,
+    "pruebas": "returncode=0\n..                                                                       [100%]\n2 passed in 0.01s",
+    "correccion_verificada": true
+  }
+]

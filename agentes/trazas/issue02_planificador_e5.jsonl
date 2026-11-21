@@ -1,0 +1,4 @@
+{"tipo": "objetivo", "estado": "INICIO", "texto": "Planificar la resolución de ISSUE-02", "t": 0.0, "agente": "planificador"}
+{"tipo": "estado", "estado": "DECIDIENDO", "paso": 1, "t": 0.0, "agente": "planificador"}
+{"tipo": "estado", "estado": "VALIDANDO_CONTRATO", "paso": 1, "t": 0.0, "agente": "planificador"}
+{"tipo": "final", "estado": "FINALIZADO", "paso": 1, "pensamiento": "Definir el trabajo y las verificaciones", "texto": "Reproducir ISSUE-02, corregir la validación de matrícula y ejecutar las pruebas", "t": 0.0, "agente": "planificador"}
