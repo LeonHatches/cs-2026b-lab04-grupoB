@@ -1,0 +1,18 @@
+[
+  {
+    "pensamiento": "Inspeccionar el cambio realizado",
+    "accion": "ver_cambios",
+    "args": {}
+  },
+  {
+    "pensamiento": "Comprobar que las pruebas funcionan",
+    "accion": "ejecutar_pruebas",
+    "args": {
+      "objetivo": "tests/test_issue_02.py"
+    }
+  },
+  {
+    "pensamiento": "Revisión completada",
+    "final": "Revisión finalizada; verificar el resultado de las pruebas"
+  }
+]

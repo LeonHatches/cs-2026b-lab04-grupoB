@@ -1,0 +1,11 @@
+--- a/src/bibliounsa_lab10/dominio.py
++++ b/src/bibliounsa_lab10/dominio.py
+@@ -13,6 +13,8 @@
+ 
+ def reservar_ejemplar(matricula_vigente: bool, disponible: bool) -> str:
+     """Decisión simulada para una reserva; ninguna API real es invocada."""
++    if not matricula_vigente:
++        return "MATRICULA_NO_VIGENTE"
+     if not disponible:
+         return "NO_DISPONIBLE"
+     return "RESERVADA"
