@@ -1,0 +1,12 @@
+--- a/src/bibliounsa_lab10/dominio.py
++++ b/src/bibliounsa_lab10/dominio.py
+@@ -8,7 +8,8 @@
+     """Días sujetos a multa: excluye domingos; extremos (vencimiento, devolución]."""
+     if devolucion <= vencimiento:
+         return 0
+-    return (devolucion - vencimiento).days
++    return sum(1 for n in range(1, (devolucion - vencimiento).days + 1)
++               if (vencimiento + timedelta(days=n)).weekday() != 6)
+ 
+ 
+ def reservar_ejemplar(matricula_vigente: bool, disponible: bool) -> str:

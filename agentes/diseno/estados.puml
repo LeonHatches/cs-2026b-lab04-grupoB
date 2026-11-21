@@ -1,0 +1,19 @@
+@startuml
+hide empty description
+[*] --> Decidiendo
+Decidiendo --> ValidandoContrato : decisión JSON
+ValidandoContrato --> Observando : [contrato inválido] / ERROR
+ValidandoContrato --> Finalizado : [contiene final]
+ValidandoContrato --> EvaluandoPolitica : [contiene acción]
+EvaluandoPolitica --> Bloqueado : [acción denegada o paso > máximo]
+EvaluandoPolitica --> EsperandoAprobacion : [editar_archivo y aprobación requerida]
+EsperandoAprobacion --> Ejecutando : [humano responde s]
+EsperandoAprobacion --> Bloqueado : [humano responde n u otro]
+EvaluandoPolitica --> Ejecutando : [acción autorizada]
+Ejecutando --> Observando : resultado / excepción
+Bloqueado --> Observando : observación de rechazo
+Observando --> Decidiendo : [quedan decisiones]
+Observando --> LimiteAlcanzado : [presupuesto agotado]
+Finalizado --> [*]
+LimiteAlcanzado --> [*]
+@enduml

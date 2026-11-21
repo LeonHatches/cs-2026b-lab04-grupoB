@@ -1,0 +1,43 @@
+[
+  {
+    "pensamiento": "Leer especificación del fallo",
+    "accion": "leer_archivo",
+    "args": {
+      "ruta": "issues/ISSUE-01.md"
+    }
+  },
+  {
+    "pensamiento": "Confirmar prueba en rojo antes del cambio",
+    "accion": "ejecutar_pruebas",
+    "args": {
+      "objetivo": "tests/test_issue_01.py"
+    }
+  },
+  {
+    "pensamiento": "Consultar código del dominio",
+    "accion": "leer_archivo",
+    "args": {
+      "ruta": "src/bibliounsa_lab10/dominio.py"
+    }
+  },
+  {
+    "pensamiento": "Excluir domingos del cálculo",
+    "accion": "editar_archivo",
+    "args": {
+      "ruta": "src/bibliounsa_lab10/dominio.py",
+      "antes": "    return (devolucion - vencimiento).days",
+      "despues": "    return sum(1 for n in range(1, (devolucion - vencimiento).days + 1)\n               if (vencimiento + timedelta(days=n)).weekday() != 6)"
+    }
+  },
+  {
+    "pensamiento": "Comprobar prueba en verde",
+    "accion": "ejecutar_pruebas",
+    "args": {
+      "objetivo": "tests/test_issue_01.py"
+    }
+  },
+  {
+    "pensamiento": "La regresión del issue 1 fue verificada",
+    "final": "ISSUE-01 corregido en la copia; la prueba del domingo pasa."
+  }
+]
