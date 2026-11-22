@@ -236,3 +236,24 @@ El siguiente gráfico representa la comparación de las tasas de aprobación de 
 - **No determinismo:** [no_determinismo.md](prompts/no_determinismo.md).
 - **Proveedor de fixtures:** [proveedor_grabado.py](prompts/proveedor_grabado.py).
 - **Gráfico de resultados:** [grafico_resultados.png](docs/prompts/img/grafico_resultados.png).
+
+## Sistemas agénticos (Lab 10)
+
+### Máquina de estados de agente
+
+![Maquina de estados de Agente](agentes/diseno/estados.png)
+
+### Diagrama de trayectoria de ISSUE-01
+
+![Diagrama de trayectoria de ISSUE-01](agentes/trazas/issue01_demo.mmd)
+
+### Observaciones de agentes por ISSUE
+
+Tabla de métricas de las trazas de los 3 issues.
+
+| Issue / configuración | Pasos | Rondas | Herramientas usadas | Decisiones rechazadas por contrato | Acciones bloqueadas | Contexto final (caracteres) |
+|---|---:|---:|---|---:|---:|---:|
+| ISSUE-01 | 6 | 6 | `leer_archivo`, `ejecutar_pruebas`, `editar_archivo` | 0 | 0 | 2906 |
+| ISSUE-02 · Agente único | 4 | 4 | `ejecutar_pruebas`, `editar_archivo` | 0 | 0 | 1310 |
+| ISSUE-02 · Multiagente | 8 | 8 | `ejecutar_pruebas`, `editar_archivo`, `ver_cambios` | 0 | 0 | 2512 |
+| ISSUE-03 | 10 | 10 | `leer_archivo`, `ejecutar_pruebas`, `editar_archivo`, `ver_cambios` | 0 | 0 | 4405 |
