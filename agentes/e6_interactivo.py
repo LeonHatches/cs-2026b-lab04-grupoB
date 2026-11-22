@@ -38,7 +38,7 @@ class ModeloE6:
 
 with TemporaryDirectory() as temporal:
     copia = Path(temporal) / "copia"
-    copytree(ROOT / "trabajo_original", copia)
+    copytree(ROOT / "trabajo", copia)
     h = Herramientas(copia)
     original = (copia / RUTA).read_text(encoding="utf-8")
 
