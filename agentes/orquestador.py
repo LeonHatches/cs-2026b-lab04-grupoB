@@ -14,7 +14,7 @@ from agente.traza import generar_diagrama
 
 
 ROOT = Path(__file__).resolve().parent
-ORIGINAL = ROOT / "trabajo_original"
+ORIGINAL = ROOT / "trabajo"
 OBJETIVO = "ISSUE-01: corregir el conteo de domingos en el cálculo de días de multa."
 
 

@@ -10,7 +10,7 @@ from agente.nucleo import Agente
 from agente.politica import Politica
 
 ROOT = Path(__file__).resolve().parent
-ORIGINAL = ROOT / "trabajo_original"
+ORIGINAL = ROOT / "trabajo"
 TRAYECTORIAS = ROOT / "trayectorias"
 TRAZAS = ROOT / "trazas"
 TRAZAS.mkdir(exist_ok=True)
