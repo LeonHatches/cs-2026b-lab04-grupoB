@@ -1,0 +1,8 @@
+Lab 11 de BiblioUNSA · Pruebas locales
+Python 3.12.14 | MCP 2.3.0
+Resultado: 21 pruebas aprobadas (12 de dominio y 9 de contrato).
+
+Ejecutado desde bibliounsa_mcp
+> python -m pytest -q -p no:cacheprovider pruebas
+.....................                                                    [100%]
+21 passed in 1.43s
