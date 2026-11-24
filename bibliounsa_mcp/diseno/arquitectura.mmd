@@ -1,0 +1,7 @@
+flowchart LR
+    H[Host VS Code o agente Lab10] --> C[Cliente MCP stdio]
+    C --> S[Servidor MCP BiblioUNSA]
+    S --> D[Servicios del dominio]
+    D --> B[(Datos ficticios)]
+    S --> R[Reglamento y ADR]
+    H -.-> P[Aprobación humana para crear_reserva]
