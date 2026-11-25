@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "bibliounsa": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "servidor_mcp/bibliounsa_mcp.py"
+      ]
+    }
+  }
+}
